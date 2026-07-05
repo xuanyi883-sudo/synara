@@ -7,6 +7,7 @@ import { type ModelSlug, type ProviderKind, type ServerProviderStatus } from "@t
 import { resolveSelectableModel } from "@t3tools/shared/model";
 import * as Schema from "effect/Schema";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { type ProviderPickerKind, PROVIDER_OPTIONS } from "../../session-logic";
 import { formatProviderModelOptionName } from "../../providerModelOptions";
 import { compareProvidersByOrder } from "../../providerOrdering";
@@ -49,28 +50,28 @@ function isAvailableProviderOption(option: (typeof PROVIDER_OPTIONS)[number]): o
   return option.available;
 }
 
-function resolveLiveProviderAvailability(provider: ServerProviderStatus | undefined): {
+function resolveLiveProviderAvailability(provider: ServerProviderStatus | undefined, t: (key: string) => string): {
   disabled: boolean;
   label: string | null;
 } {
   if (!provider) {
     return {
       disabled: true,
-      label: "Checking",
+      label: t("chat.providerModelPicker.checking"),
     };
   }
 
   if (!provider.available) {
     return {
       disabled: true,
-      label: provider.authStatus === "unauthenticated" ? "Sign in" : "Unavailable",
+      label: provider.authStatus === "unauthenticated" ? t("chat.providerModelPicker.signIn") : t("chat.providerModelPicker.unavailable"),
     };
   }
 
   if (provider.authStatus === "unauthenticated") {
     return {
       disabled: true,
-      label: "Sign in",
+      label: t("chat.providerModelPicker.signIn"),
     };
   }
 

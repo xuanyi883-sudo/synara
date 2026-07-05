@@ -7,6 +7,7 @@
 import type { ResolvedKeybindingsConfig } from "@t3tools/contracts";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { Input } from "~/components/ui/input";
 import { ShortcutKbd } from "~/components/ui/shortcut-kbd";
@@ -40,6 +41,7 @@ const SETTINGS_SHORTCUT_CONTEXT: ShortcutSheetContext = {
 };
 
 export function KeyboardShortcutsSettingsPanel() {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const serverConfigQuery = useQuery(serverConfigQueryOptions());
   const keybindings = serverConfigQuery.data?.keybindings ?? EMPTY_KEYBINDINGS;
@@ -71,7 +73,7 @@ export function KeyboardShortcutsSettingsPanel() {
           size="sm"
           variant="soft"
           nativeInput
-          placeholder="Search shortcuts..."
+          placeholder={t("settings.keyboardShortcuts.searchPlaceholder")}
           value={query}
           aria-label="Search shortcuts"
           onChange={(event) => setQuery(event.target.value)}
@@ -95,8 +97,8 @@ export function KeyboardShortcutsSettingsPanel() {
           className={cn(SETTINGS_CARD_CLASS_NAME, "divide-y divide-[color:var(--color-border)]")}
         >
           <div className="flex items-center justify-between gap-4 px-3 py-2 text-[11px] font-medium text-muted-foreground">
-            <span>Command</span>
-            <span>Keybinding</span>
+            <span>{t("settings.keyboardShortcuts.command")}</span>
+            <span>{t("settings.keyboardShortcuts.keybinding")}</span>
           </div>
           {filteredSections.flatMap((section) => {
             const muted = section.tone === "muted";
@@ -129,7 +131,7 @@ export function KeyboardShortcutsSettingsPanel() {
             "px-4 py-10 text-center text-sm text-muted-foreground",
           )}
         >
-          No shortcuts match &ldquo;{query}&rdquo;.
+          {t("settings.keyboardShortcuts.noMatches", { query })}
         </div>
       )}
     </div>

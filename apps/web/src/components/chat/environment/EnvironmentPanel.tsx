@@ -21,6 +21,7 @@ import type {
   ThreadMarkerId,
 } from "@t3tools/contracts";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { useAppSettings } from "~/appSettings";
 import { SETTINGS_TARGETS } from "~/settingsNavigation";
@@ -164,8 +165,9 @@ function EnvironmentRecapSection({
   recap: NonNullable<EnvironmentPanelProps["recap"]>;
   markdownCwd: string | undefined;
 }) {
+  const { t } = useTranslation();
   return (
-    <EnvironmentCollapsibleSection label="Recap">
+    <EnvironmentCollapsibleSection label={t("environment.recap.label")}>
       <div className="flex flex-col gap-1.5 pb-1.5">
         {recap.text ? (
           <div className="px-2">
