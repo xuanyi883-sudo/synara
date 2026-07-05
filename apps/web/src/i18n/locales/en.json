@@ -15,9 +15,254 @@
     "error": "Error",
     "retry": "Retry"
   },
+  "sidebar": {
+    "sort": {
+      "lastUserMessage": "Last user message",
+      "createdAt": "Created at",
+      "manual": "Manual",
+      "sortProjects": "Sort projects",
+      "sortThreads": "Sort threads",
+      "sortChats": "Sort chats"
+    },
+    "status": {
+      "completed": "Completed",
+      "devServerRunning": "Dev server running",
+      "paused": "Paused",
+      "forkedThread": "Forked thread",
+      "terminalOpen": "Terminal open"
+    },
+    "terminal": {
+      "inputNeeded": "Terminal needs input",
+      "taskCompleted": "Terminal task completed",
+      "processRunning": "Terminal process running",
+      "terminalsOpen": "{{count}} terminal(s) open"
+    },
+    "pr": {
+      "open": "PR open",
+      "closed": "PR closed",
+      "merged": "PR merged"
+    },
+    "views": {
+      "threads": "Threads",
+      "workspace": "Workspace"
+    },
+    "contextMenu": {
+      "renameThread": "Rename thread",
+      "clearNotification": "Clear notification",
+      "markUnread": "Mark as unread",
+      "copyPath": "Copy path",
+      "openPathInTerminal": "Open path in terminal",
+      "copyThreadId": "Copy thread ID",
+      "archive": "Archive",
+      "delete": "Delete",
+      "handoffTo": "Hand off to {{provider}}"
+    },
+    "multiSelect": {
+      "markUnreadCount": "Mark as unread ({{count}})",
+      "archiveCount": "Archive ({{count}})",
+      "deleteCount": "Delete ({{count}})",
+      "archivedHidden": "Archived threads are hidden from the sidebar but can be restored later.",
+      "deleteDescription": "This will permanently clear the conversation history for these threads."
+    },
+    "archive": {
+      "archiveThread": "Archive thread"
+    },
+    "toast": {
+      "pathUnavailable": "Path unavailable",
+      "pathUnavailableDescription": "Could not resolve the project path.",
+      "unableToOpenTerminal": "Unable to open terminal",
+      "unableToOpenTerminalDescription": "Could not start terminal for this path.",
+      "unableToPinThread": "Unable to pin thread",
+      "unableToUnpinThread": "Unable to unpin thread",
+      "linkOpeningUnavailable": "Link opening unavailable.",
+      "unableToOpenPrLink": "Unable to open PR link",
+      "projectPinLimitReached": "Project pin limit reached",
+      "projectPinLimitDescription": "You can pin up to {{limit}} projects.",
+      "unableToPinProject": "Unable to pin project",
+      "unableToUnpinProject": "Unable to unpin project",
+      "unableToAddProject": "Unable to add project",
+      "unableToOpenFolderPicker": "Unable to open folder picker",
+      "failedToRenameThread": "Failed to rename thread",
+      "threadTitleCannotBeEmpty": "Thread title cannot be empty",
+      "couldNotCreateHandoffThread": "Could not create handoff thread",
+      "couldNotCreateHandoffThreadDescription": "An error occurred while creating the handoff thread.",
+      "cannotArchive": "Cannot archive",
+      "cannotArchiveDescription": "Please stop the running thread before archiving it.",
+      "couldNotRestoreThread": "Could not restore thread",
+      "threadNoLongerExists": "The thread no longer exists.",
+      "unableToRestoreThread": "Unable to restore the thread.",
+      "couldNotArchiveThread": "Could not archive thread",
+      "unableToArchiveThread": "Unable to archive the thread.",
+      "nothingToArchive": "Nothing to archive",
+      "nothingToArchiveDescription": "\"{{projectName}}\" has no threads to archive.",
+      "cannotArchiveThreads": "Cannot archive threads",
+      "onlyThreadRunning": "The only thread in this project is running. Please stop it first before archiving.",
+      "allThreadsRunning": "All {{count}} threads in this project are running. Please stop them first before archiving.",
+      "threadArchived": "Thread archived",
+      "archivedThreads": "Archived {{count}} thread(s)",
+      "failedToArchiveThreads": "Failed to archive threads",
+      "couldNotArchiveThreadsDescription": "Could not archive {{count}} thread(s) in \"{{projectName}}\".",
+      "projectCleared": "\"{{projectName}}\" has been cleared.",
+      "nothingToDelete": "Nothing to delete",
+      "nothingToDeleteDescription": "\"{{projectName}}\" has no threads to delete.",
+      "threadDeleted": "Thread deleted",
+      "deletedThreads": "Deleted {{count}} thread(s)",
+      "failedToDeleteThreads": "Failed to delete threads",
+      "couldNotDeleteThreadsDescription": "Could not delete {{count}} thread(s) in \"{{projectName}}\".",
+      "threadDeletedButWorktreeFailed": "Thread deleted but worktree removal failed",
+      "unableToOpenLocalServer": "Unable to open {{serverName}}",
+      "unableToOpenLocalServerDescription": "Unable to open local server.",
+      "unableToOpenInFinder": "Unable to open in Finder",
+      "unknownErrorOpeningFolder": "An unknown error occurred while opening the folder.",
+      "failedToRunProject": "Failed to run \"{{projectName}}\"",
+      "unableToStartRunCommand": "Unable to start run command.",
+      "failedToStopRun": "Failed to stop run",
+      "unableToStopDevServer": "Unable to stop dev server.",
+      "unknownErrorRemovingProject": "An unknown error occurred while removing the project."
+    },
+    "confirmation": {
+      "deleteThread": "Delete thread \"{{title}}\"?",
+      "deleteThreadDescription": "This will permanently clear the conversation history for this thread.",
+      "archiveThread": "Archive thread \"{{title}}\"?",
+      "archiveThreadDescription": "Archived threads are hidden from the sidebar but can be restored later.",
+      "bulkArchiveThreads": "Archive {{count}} thread(s) in \"{{projectName}}\"?",
+      "bulkArchiveDescription": "Archived threads are hidden from the sidebar but can be restored later.",
+      "bulkArchiveRunningSkipped": "{{count}} running thread(s) are currently active and will be skipped.",
+      "bulkDeleteThreads": "Delete {{count}} thread(s) in \"{{projectName}}\"?",
+      "bulkDeleteDescription": "This will permanently clear the conversation history for these threads.",
+      "removeProject": "Remove project \"{{projectName}}\"?",
+      "removeProjectDescription": "This will delete {{count}} thread(s) in this folder and remove the project.",
+      "removeProjectShort": "Remove project \"{{projectName}}\"?"
+    },
+    "desktopUpdate": {
+      "downloadManually": "Download manually",
+      "updateAvailable": "Update available",
+      "preparingUpdate": "Preparing update",
+      "preparingUpdateDescription": "Synara is preparing version {{version}} in the background.",
+      "downloadingUpdateDescription": "Synara is downloading the update in the background.",
+      "updateReady": "Update ready",
+      "updateReadyDescription": "Click update when ready to restart and install.",
+      "upToDate": "Up to date",
+      "upToDateDescription": "Synara {{version}} is up to date.",
+      "couldNotCheckForUpdates": "Could not check for updates",
+      "couldNotDownloadUpdate": "Could not download update",
+      "couldNotStartDownload": "Could not start download update",
+      "couldNotInstallUpdate": "Could not install update",
+      "unexpectedError": "An unexpected error occurred.",
+      "alreadyUpToDate": "Already up to date",
+      "couldNotFinishUpdating": "Could not finish updating",
+      "couldNotDownloadTheUpdate": "Could not download the update",
+      "inAppUpdateCouldNotComplete": "In-app update could not complete. You can download manually."
+    },
+    "arm": {
+      "intelBuildTitle": "Intel build on Apple Silicon",
+      "preparingBuild": "Preparing ARM build",
+      "updateBuild": "Update ARM build",
+      "checkForUpdate": "Check for ARM build update"
+    },
+    "primaryActions": {
+      "newWorkspace": "New workspace",
+      "newThread": "New thread",
+      "search": "Search",
+      "kanban": "Kanban",
+      "automations": "Automations"
+    },
+    "workspace": {
+      "deleteWorkspace": "Delete workspace",
+      "collapseAll": "Collapse all projects",
+      "collapseAllExceptActive": "Collapse all projects except active",
+      "expandAll": "Expand all projects"
+    },
+    "addProject": {
+      "addProject": "Add project",
+      "cancelAddProject": "Cancel add project",
+      "browse": "Browse",
+      "opening": "Opening...",
+      "adding": "Adding...",
+      "typePath": "Type path"
+    },
+    "searchPalette": {
+      "newChat": "New chat",
+      "newThread": "New thread",
+      "addProject": "Add project",
+      "importThread": "Import thread...",
+      "settings": "Settings",
+      "usageSettings": "Usage settings",
+      "newChatDescription": "Open the new chat home page.",
+      "newThreadDescription": "Start a new thread in the current project.",
+      "addProjectDescription": "Open a repository or folder in the sidebar.",
+      "importThreadDescription": "Attach a local thread to an existing provider session.",
+      "settingsDescription": "Open app settings.",
+      "usageSettingsDescription": "Open provider usage and remaining credits."
+    },
+    "newThread": {
+      "newTerminalThread": "New terminal thread",
+      "newThreadWithShortcut": "New thread ({{shortcut}})"
+    },
+    "project": {
+      "project": "Project",
+      "renameProject": "Rename project",
+      "unknownProject": "Unknown project",
+      "openInFinder": "Open in Finder",
+      "openInKanban": "Open in Kanban",
+      "copyPath": "Copy path",
+      "stopDev": "Stop dev",
+      "startDev": "Start dev",
+      "openDevServer": "Open dev server",
+      "editName": "Edit name",
+      "archiveThreads": "Archive threads",
+      "deleteThreads": "Delete threads",
+      "remove": "Remove"
+    },
+    "runDialog": {
+      "startDev": "Start dev",
+      "project": "Project",
+      "command": "Command",
+      "commandPlaceholder": "e.g. npm run dev",
+      "enterCommand": "Enter a command to run.",
+      "run": "Run"
+    },
+    "renameProjectDialog": {
+      "title": "Rename project",
+      "description": "Keep it short and recognizable."
+    },
+    "sections": {
+      "pinned": "Pinned",
+      "projects": "Projects",
+      "chats": "Chats",
+      "workspace": "Workspace"
+    },
+    "emptyStates": {
+      "noProjects": "No projects yet",
+      "noChats": "No chats yet",
+      "loadingProjects": "Loading projects...",
+      "loadingProjectsAriaLabel": "Loading projects"
+    },
+    "collapse": {
+      "collapseAllProjects": "Collapse all projects",
+      "expandAllProjects": "Expand all projects",
+      "collapseAllExceptActiveProject": "Collapse all projects except active",
+      "collapseAllExceptActiveChatProject": "Collapse all projects except active chat project"
+    },
+    "newChatHome": {
+      "openNewChatHome": "Open new chat home",
+      "newChat": "New chat",
+      "newChatWithShortcut": "New chat ({{shortcut}})"
+    },
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "worktree": {
+      "deleteWorktreeToo": "Delete the worktree too?",
+      "onlyThreadLinked": "This thread is the only one linked to this worktree:"
+    },
+    "archiveUndo": {
+      "undo": "Undo",
+      "viewArchived": "View archived chats in Settings"
+    }
+  },
   "_meta": {
-    "description": "English translation file - auto-generated keys, review and fill manually",
+    "description": "English translation file",
     "lastUpdated": "2026-07-05",
-    "totalKeys": 14
+    "totalKeys": 169
   }
 }

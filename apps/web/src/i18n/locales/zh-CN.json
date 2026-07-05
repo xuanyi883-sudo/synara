@@ -15,9 +15,254 @@
     "error": "错误",
     "retry": "重试"
   },
+  "sidebar": {
+    "sort": {
+      "lastUserMessage": "最近用户消息",
+      "createdAt": "创建时间",
+      "manual": "手动",
+      "sortProjects": "项目排序",
+      "sortThreads": "会话排序",
+      "sortChats": "聊天排序"
+    },
+    "status": {
+      "completed": "已完成",
+      "devServerRunning": "开发服务器运行中",
+      "paused": "已暂停",
+      "forkedThread": "分叉的会话",
+      "terminalOpen": "终端已打开"
+    },
+    "terminal": {
+      "inputNeeded": "终端需要输入",
+      "taskCompleted": "终端任务已完成",
+      "processRunning": "终端进程运行中",
+      "terminalsOpen": "{{count}} 个终端已打开"
+    },
+    "pr": {
+      "open": "PR 已打开",
+      "closed": "PR 已关闭",
+      "merged": "PR 已合并"
+    },
+    "views": {
+      "threads": "会话",
+      "workspace": "工作区"
+    },
+    "contextMenu": {
+      "renameThread": "重命名会话",
+      "clearNotification": "清除通知",
+      "markUnread": "标记为未读",
+      "copyPath": "复制路径",
+      "openPathInTerminal": "在终端中打开路径",
+      "copyThreadId": "复制会话 ID",
+      "archive": "归档",
+      "delete": "删除",
+      "handoffTo": "移交给 {{provider}}"
+    },
+    "multiSelect": {
+      "markUnreadCount": "标记为未读 ({{count}})",
+      "archiveCount": "归档 ({{count}})",
+      "deleteCount": "删除 ({{count}})",
+      "archivedHidden": "归档的会话已从侧边栏隐藏，但可以稍后恢复。",
+      "deleteDescription": "这将永久清除这些会话的对话历史记录。"
+    },
+    "archive": {
+      "archiveThread": "归档会话"
+    },
+    "toast": {
+      "pathUnavailable": "路径不可用",
+      "pathUnavailableDescription": "无法解析项目路径。",
+      "unableToOpenTerminal": "无法打开终端",
+      "unableToOpenTerminalDescription": "无法为此路径启动终端。",
+      "unableToPinThread": "无法置顶会话",
+      "unableToUnpinThread": "无法取消置顶会话",
+      "linkOpeningUnavailable": "链接打开不可用。",
+      "unableToOpenPrLink": "无法打开 PR 链接",
+      "projectPinLimitReached": "已达到项目置顶上限",
+      "projectPinLimitDescription": "您最多可以置顶 {{limit}} 个项目。",
+      "unableToPinProject": "无法置顶项目",
+      "unableToUnpinProject": "无法取消置顶项目",
+      "unableToAddProject": "无法添加项目",
+      "unableToOpenFolderPicker": "无法打开文件夹选择器",
+      "failedToRenameThread": "重命名会话失败",
+      "threadTitleCannotBeEmpty": "会话标题不能为空",
+      "couldNotCreateHandoffThread": "无法创建移交会话",
+      "couldNotCreateHandoffThreadDescription": "创建移交会话时发生错误。",
+      "cannotArchive": "无法归档",
+      "cannotArchiveDescription": "请先停止运行中的会话，再归档此会话。",
+      "couldNotRestoreThread": "无法恢复会话",
+      "threadNoLongerExists": "该会话已不存在。",
+      "unableToRestoreThread": "无法恢复该会话。",
+      "couldNotArchiveThread": "无法归档会话",
+      "unableToArchiveThread": "无法归档该会话。",
+      "nothingToArchive": "没有可归档的内容",
+      "nothingToArchiveDescription": "\"{{projectName}}\" 没有可归档的会话。",
+      "cannotArchiveThreads": "无法归档会话",
+      "onlyThreadRunning": "此项目中唯一的会话正在运行。请先停止后再归档。",
+      "allThreadsRunning": "此项目中所有 {{count}} 个会话正在运行。请先停止后再归档。",
+      "threadArchived": "会话已归档",
+      "archivedThreads": "已归档 {{count}} 个会话",
+      "failedToArchiveThreads": "归档会话失败",
+      "couldNotArchiveThreadsDescription": "无法在 \"{{projectName}}\" 中归档 {{count}} 个会话。",
+      "projectCleared": "\"{{projectName}}\" 已清空。",
+      "nothingToDelete": "没有可删除的内容",
+      "nothingToDeleteDescription": "\"{{projectName}}\" 没有可删除的会话。",
+      "threadDeleted": "会话已删除",
+      "deletedThreads": "已删除 {{count}} 个会话",
+      "failedToDeleteThreads": "删除会话失败",
+      "couldNotDeleteThreadsDescription": "无法在 \"{{projectName}}\" 中删除 {{count}} 个会话。",
+      "threadDeletedButWorktreeFailed": "会话已删除，但工作树移除失败",
+      "unableToOpenLocalServer": "无法打开 {{serverName}}",
+      "unableToOpenLocalServerDescription": "无法打开本地服务器。",
+      "unableToOpenInFinder": "无法在 Finder 中打开",
+      "unknownErrorOpeningFolder": "打开文件夹时发生未知错误。",
+      "failedToRunProject": "运行 \"{{projectName}}\" 失败",
+      "unableToStartRunCommand": "无法启动运行命令。",
+      "failedToStopRun": "停止运行失败",
+      "unableToStopDevServer": "无法停止开发服务器。",
+      "unknownErrorRemovingProject": "移除项目时发生未知错误。"
+    },
+    "confirmation": {
+      "deleteThread": "删除会话 \"{{title}}\"？",
+      "deleteThreadDescription": "这将永久清除该会话的对话历史记录。",
+      "archiveThread": "归档会话 \"{{title}}\"？",
+      "archiveThreadDescription": "归档的会话已从侧边栏隐藏，但可以稍后恢复。",
+      "bulkArchiveThreads": "在 \"{{projectName}}\" 中归档 {{count}} 个会话？",
+      "bulkArchiveDescription": "归档的会话已从侧边栏隐藏，但可以稍后恢复。",
+      "bulkArchiveRunningSkipped": "{{count}} 个运行中的会话当前处于活跃状态，将被跳过。",
+      "bulkDeleteThreads": "在 \"{{projectName}}\" 中删除 {{count}} 个会话？",
+      "bulkDeleteDescription": "这将永久清除这些会话的对话历史记录。",
+      "removeProject": "移除项目 \"{{projectName}}\"？",
+      "removeProjectDescription": "这将删除此文件夹中的 {{count}} 个会话并移除该项目。",
+      "removeProjectShort": "移除项目 \"{{projectName}}\"？"
+    },
+    "desktopUpdate": {
+      "downloadManually": "手动下载",
+      "updateAvailable": "有可用更新",
+      "preparingUpdate": "准备更新",
+      "preparingUpdateDescription": "Synara 正在后台准备版本 {{version}}。",
+      "downloadingUpdateDescription": "Synara 正在后台下载更新。",
+      "updateReady": "更新已就绪",
+      "updateReadyDescription": "准备就绪后点击更新以重启并安装。",
+      "upToDate": "已是最新版本",
+      "upToDateDescription": "Synara {{version}} 已是最新版本。",
+      "couldNotCheckForUpdates": "无法检查更新",
+      "couldNotDownloadUpdate": "无法下载更新",
+      "couldNotStartDownload": "无法开始下载更新",
+      "couldNotInstallUpdate": "无法安装更新",
+      "unexpectedError": "发生意外错误。",
+      "alreadyUpToDate": "已是最新版本",
+      "couldNotFinishUpdating": "无法完成更新",
+      "couldNotDownloadTheUpdate": "无法下载更新",
+      "inAppUpdateCouldNotComplete": "应用内更新无法完成。您可以手动下载。"
+    },
+    "arm": {
+      "intelBuildTitle": "Apple Silicon 上的 Intel 构建",
+      "preparingBuild": "准备 ARM 构建",
+      "updateBuild": "更新 ARM 构建",
+      "checkForUpdate": "检查 ARM 构建更新"
+    },
+    "primaryActions": {
+      "newWorkspace": "新工作区",
+      "newThread": "新会话",
+      "search": "搜索",
+      "kanban": "看板",
+      "automations": "自动化"
+    },
+    "workspace": {
+      "deleteWorkspace": "删除工作区",
+      "collapseAll": "折叠所有项目",
+      "collapseAllExceptActive": "折叠除活动项目外的所有项目",
+      "expandAll": "展开所有项目"
+    },
+    "addProject": {
+      "addProject": "添加项目",
+      "cancelAddProject": "取消添加项目",
+      "browse": "浏览",
+      "opening": "打开中...",
+      "adding": "添加中...",
+      "typePath": "输入路径"
+    },
+    "searchPalette": {
+      "newChat": "新聊天",
+      "newThread": "新会话",
+      "addProject": "添加项目",
+      "importThread": "导入会话...",
+      "settings": "设置",
+      "usageSettings": "使用量设置",
+      "newChatDescription": "打开新聊天落地页。",
+      "newThreadDescription": "在当前项目中开始新会话。",
+      "addProjectDescription": "在侧边栏中打开仓库或文件夹。",
+      "importThreadDescription": "将本地会话附加到现有提供商会话。",
+      "settingsDescription": "打开应用设置。",
+      "usageSettingsDescription": "查看提供商使用量和剩余积分。"
+    },
+    "newThread": {
+      "newTerminalThread": "新终端会话",
+      "newThreadWithShortcut": "新会话 ({{shortcut}})"
+    },
+    "project": {
+      "project": "项目",
+      "renameProject": "重命名项目",
+      "unknownProject": "未知项目",
+      "openInFinder": "在 Finder 中打开",
+      "openInKanban": "在看板中打开",
+      "copyPath": "复制路径",
+      "stopDev": "停止开发",
+      "startDev": "启动开发",
+      "openDevServer": "打开开发服务器",
+      "editName": "编辑名称",
+      "archiveThreads": "归档会话",
+      "deleteThreads": "删除会话",
+      "remove": "移除"
+    },
+    "runDialog": {
+      "startDev": "启动开发",
+      "project": "项目",
+      "command": "命令",
+      "commandPlaceholder": "例如 npm run dev",
+      "enterCommand": "输入要运行的命令。",
+      "run": "运行"
+    },
+    "renameProjectDialog": {
+      "title": "重命名项目",
+      "description": "保持简短且易于识别。"
+    },
+    "sections": {
+      "pinned": "已固定",
+      "projects": "项目",
+      "chats": "聊天",
+      "workspace": "工作区"
+    },
+    "emptyStates": {
+      "noProjects": "暂无项目",
+      "noChats": "暂无聊天",
+      "loadingProjects": "加载项目中...",
+      "loadingProjectsAriaLabel": "加载项目中"
+    },
+    "collapse": {
+      "collapseAllProjects": "折叠所有项目",
+      "expandAllProjects": "展开所有项目",
+      "collapseAllExceptActiveProject": "折叠除活动项目外的所有项目",
+      "collapseAllExceptActiveChatProject": "折叠除当前聊天项目外的所有项目"
+    },
+    "newChatHome": {
+      "openNewChatHome": "打开新聊天主页",
+      "newChat": "新聊天",
+      "newChatWithShortcut": "新聊天 ({{shortcut}})"
+    },
+    "showMore": "显示更多",
+    "showLess": "显示更少",
+    "worktree": {
+      "deleteWorktreeToo": "同时删除工作树？",
+      "onlyThreadLinked": "此会话是唯一关联到此工作树的会话："
+    },
+    "archiveUndo": {
+      "undo": "撤销",
+      "viewArchived": "在设置中查看已归档的聊天"
+    }
+  },
   "_meta": {
     "description": "中文翻译文件",
     "lastUpdated": "2026-07-05",
-    "totalKeys": 14
+    "totalKeys": 169
   }
 }
