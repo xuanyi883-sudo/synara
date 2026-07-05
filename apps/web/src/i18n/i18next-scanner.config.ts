@@ -24,7 +24,10 @@ const config = {
     },
   },
   transform: function customTransform(
-    this: { parser: { parseFuncFromString: (content: string, callback: (key: string) => void) => void }; set: (key: string, value: string) => void },
+    this: {
+      parser: { parseFuncFromString: (content: string, callback: (key: string) => void) => void };
+      set: (key: string, value: string) => void;
+    },
     file: { path: string; contents: string },
     done: () => void,
   ) {
