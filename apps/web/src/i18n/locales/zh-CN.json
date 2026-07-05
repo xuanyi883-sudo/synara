@@ -338,8 +338,136 @@
       "scrollToBottom": "滚动到底部"
     },
     "emptyState": {
-      "letsBuild": "开始构建"
+      "letsBuild": "开始构建",
+      "whatToWorkOn": "今天想做什么？",
+      "whatToDoIn": "你想在",
+      "thisFolder": "此文件夹"
+    },
+    "loadingModels": "正在加载模型...",
+    "temporaryChat": {
+      "ariaLabel": "临时聊天",
+      "tooltipKeep": "临时聊天 — 离开时删除。点击保留。",
+      "tooltipMake": "设为临时聊天（离开时删除）",
+      "label": "临时"
+    },
+    "planMode": {
+      "title": "计划模式 — 点击返回普通构建模式",
+      "label": "计划"
+    },
+    "stopGeneration": {
+      "ariaLabel": "停止生成",
+      "title": "停止当前回复。Mac 上按 Ctrl+C 中断。"
+    },
+    "composer": {
+      "sending": "发送中...",
+      "refine": "优化",
+      "implement": "执行",
+      "implementationActions": "执行操作",
+      "implementNewThread": "在新线程中执行",
+      "connecting": "连接中",
+      "transcribingVoice": "正在转录语音",
+      "preparingWorktree": "正在准备工作树",
+      "sendMessage": "发送消息"
+    },
+    "placeholder": {
+      "resolveApproval": "解决此审批请求以继续",
+      "typeAnswer": "输入你的回答以继续",
+      "typeOwnAnswer": "输入你自己的回答，或留空使用所选选项",
+      "refinePlan": "添加反馈以优化计划，或留空直接执行",
+      "followUp": "提出后续更改要求",
+      "followUpOrAttach": "提出后续更改要求或附加图片",
+      "default": "提出要求，@标记文件/文件夹，或使用 / 查看可用命令"
+    },
+    "synaraLogo": "Synara 徽标",
+    "imagePreview": {
+      "expandedPreview": "展开的图片预览",
+      "closePreview": "关闭图片预览",
+      "previousImage": "上一张",
+      "nextImage": "下一张"
     }
+  },
+  "environment": {
+    "panel": {
+      "title": "环境",
+      "sections": "面板分区",
+      "changes": "更改",
+      "repository": "仓库"
+    },
+    "recap": {
+      "label": "回顾"
+    },
+    "notepad": {
+      "label": "记事本",
+      "placeholder": "在此输入"
+    },
+    "automations": {
+      "label": "自动化",
+      "paused": "已暂停",
+      "editAutomation": "编辑自动化 {{name}}",
+      "automationTitle": "{{name}} - {{cadence}}"
+    },
+    "pinned": {
+      "label": "已固定",
+      "messageUnavailable": "（消息不可用）",
+      "markDone": "标记完成",
+      "markNotDone": "标记未完成",
+      "renamePlaceholder": "标签",
+      "jumpOrRename": "跳转到已固定消息。按 F2 重命名。",
+      "unavailableOrRename": "已固定消息不可用。按 Enter 重命名。",
+      "clickToJumpTitle": "点击跳转 · 双击或按 F2 重命名",
+      "clickToRenameTitle": "点击或按 Enter 重命名",
+      "unpinMessage": "取消固定消息",
+      "unpin": "取消固定"
+    }
+  },
+  "kanban": {
+    "column": {
+      "draft": "草稿",
+      "inProgress": "进行中",
+      "done": "已完成"
+    },
+    "card": {
+      "terminal": "终端",
+      "pinned": "已固定",
+      "forkedThread": "分叉的会话",
+      "starting": "启动中…",
+      "workedFor": "已工作 {{elapsed}}"
+    },
+    "columnUi": {
+      "dropToSend": "拖放以发送",
+      "newTask": "新任务",
+      "noCards": "无卡片",
+      "showMore": "显示 {{count}} 个更多"
+    },
+    "view": {
+      "backToAllProjects": "返回所有项目",
+      "kanban": "看板",
+      "tasks": "个任务",
+      "newTask": "新任务"
+    },
+    "toast": {
+      "draftSent": "草稿已发送",
+      "nothingToSend": "尚未有任何可发送的内容——在编辑器中编写提示。",
+      "openWorktreeChat": "打开聊天以使用正常的发送流创建工作树。",
+      "openChatToContinue": "打开聊天以继续此任务。",
+      "finishDraftInChat": "在聊天中完成此草稿",
+      "notConnected": "未连接",
+      "reconnectToSend": "在发送草稿前重新连接到服务器。",
+      "couldNotSendDraft": "无法发送草稿",
+      "doneDerived": "已完成是自动派生的",
+      "doneDerivedDescription": "卡片在其运行完成时会移到这里。"
+    }
+  },
+  "workspace": {
+    "title": "工作区",
+    "doubleClickToRename": "双击以重命名",
+    "newTerminal": "终端",
+    "settings": "工作区设置",
+    "loading": "正在加载工作区",
+    "waitingForHomeDir": "等待渲染器解析您的主目录。",
+    "noOpenTerminals": "此工作区没有打开的终端",
+    "openTerminalHint": "在主目录中打开一个新的终端并从那里开始。",
+    "newTerminalButton": "新终端"
   },
   "settings": {
     "restoreDefaults": "恢复默认设置",
@@ -717,6 +845,6 @@
   "_meta": {
     "description": "中文翻译文件",
     "lastUpdated": "2026-07-05",
-    "totalKeys": 289
+    "totalKeys": 337
   }
 }

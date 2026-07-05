@@ -64,6 +64,7 @@ import {
   useState,
   type MouseEvent,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { GoTasklist } from "react-icons/go";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Debouncer, useDebouncedValue } from "@tanstack/react-pacer";
@@ -923,16 +924,19 @@ function ComposerControlSkeleton(props: { widthClassName: string }) {
 }
 
 function ComposerModelLoadingControl(props: { widthClassName: string }) {
+  const { t } = useTranslation();
   return (
     <div
-      aria-label="Loading models"
+      aria-label={t("chat.loadingModels")}
       className={cn(
         "flex h-8 shrink-0 items-center gap-2 rounded-md border border-border/50 px-2 text-muted-foreground",
         props.widthClassName,
       )}
     >
       <RefreshCwIcon aria-hidden="true" className="size-3.5 animate-spin" />
-      <span className="truncate text-[length:var(--app-font-size-ui-xs,11px)]">Loading models</span>
+      <span className="truncate text-[length:var(--app-font-size-ui-xs,11px)]">
+        {t("chat.loadingModels")}
+      </span>
     </div>
   );
 }
@@ -1016,6 +1020,7 @@ export default function ChatView({
   onChangeThreadInSplitPane,
   onCloseThreadPane,
 }: ChatViewProps) {
+  const { t } = useTranslation();
   const markThreadVisited = useStore((store) => store.markThreadVisited);
   const syncServerShellSnapshot = useStore((store) => store.syncServerShellSnapshot);
   const setStoreThreadError = useStore((store) => store.setError);
@@ -10034,10 +10039,10 @@ export default function ChatView({
           onClick={toggleDraftTemporary}
           title={
             isThreadTemporary
-              ? "Temporary chat — deleted when you leave. Click to keep it."
-              : "Make this a temporary chat (deleted when you leave)"
+              ? t("chat.temporaryChat.tooltipKeep")
+              : t("chat.temporaryChat.tooltipMake")
           }
-          aria-label="Temporary chat"
+          aria-label={t("chat.temporaryChat.ariaLabel")}
           className={cn(
             "ml-auto shrink-0 gap-1.5 whitespace-nowrap px-2 text-[length:var(--app-font-size-ui-sm,11px)] font-normal transition-colors sm:px-2.5",
             isThreadTemporary
@@ -10046,7 +10051,7 @@ export default function ChatView({
           )}
         >
           <TemporaryThreadIcon className="size-3.5" />
-          <span className="sr-only sm:not-sr-only">Temporary</span>
+          <span className="sr-only sm:not-sr-only">{t("chat.temporaryChat.label")}</span>
         </Button>
       ) : null}
     </div>
@@ -10318,18 +10323,18 @@ export default function ChatView({
                       : {})}
                     placeholder={
                       isComposerApprovalState
-                        ? "Resolve this approval request to continue"
+                        ? t("chat.placeholder.resolveApproval")
                         : activePendingProgress
                           ? activePendingProgress.activeQuestion?.options.length === 0
-                            ? "Type your answer to continue"
-                            : "Type your own answer, or leave this blank to use the selected option"
+                            ? t("chat.placeholder.typeAnswer")
+                            : t("chat.placeholder.typeOwnAnswer")
                           : showPlanFollowUpPrompt && activeProposedPlan
-                            ? "Add feedback to refine the plan, or leave this blank to implement it"
+                            ? t("chat.placeholder.refinePlan")
                             : hasLiveTurn
-                              ? "Ask for follow-up changes"
+                              ? t("chat.placeholder.followUp")
                               : phase === "disconnected"
-                                ? "Ask for follow-up changes or attach images"
-                                : "Ask anything, @tag files/folders, or use / to show available commands"
+                                ? t("chat.placeholder.followUpOrAttach")
+                                : t("chat.placeholder.default")
                     }
                     disabled={isComposerEditorDisabled}
                   />
@@ -10372,10 +10377,12 @@ export default function ChatView({
                               size="sm"
                               type="button"
                               onClick={toggleInteractionMode}
-                              title="Plan mode — click to return to normal build mode"
+                              title={t("chat.planMode.title")}
                             >
                               <GoTasklist className="size-3.5" />
-                              <span className="sr-only sm:not-sr-only">Plan</span>
+                              <span className="sr-only sm:not-sr-only">
+                                {t("chat.planMode.label")}
+                              </span>
                             </Button>
                           ) : null}
 
@@ -10473,8 +10480,8 @@ export default function ChatView({
                           size="icon-xs"
                           className="sm:size-[26px]"
                           onClick={() => void onInterrupt()}
-                          aria-label="Stop generation"
-                          title="Stop the current response. On Mac, press Ctrl+C to interrupt."
+                          aria-label={t("chat.stopGeneration.ariaLabel")}
+                          title={t("chat.stopGeneration.title")}
                         >
                           <span
                             aria-hidden="true"
@@ -10492,7 +10499,9 @@ export default function ChatView({
                               className="h-9 rounded-full px-4 sm:h-8"
                               disabled={isSendBusy || isConnecting}
                             >
-                              {isConnecting || isSendBusy ? "Sending..." : "Refine"}
+                              {isConnecting || isSendBusy
+                                ? t("chat.composer.sending")
+                                : t("chat.composer.refine")}
                             </Button>
                           ) : (
                             <div className="flex items-center">
@@ -10502,7 +10511,9 @@ export default function ChatView({
                                 className="h-9 rounded-l-full rounded-r-none px-4 sm:h-8"
                                 disabled={isSendBusy || isConnecting}
                               >
-                                {isConnecting || isSendBusy ? "Sending..." : "Implement"}
+                                {isConnecting || isSendBusy
+                                  ? t("chat.composer.sending")
+                                  : t("chat.composer.implement")}
                               </Button>
                               <Menu>
                                 <MenuTrigger
@@ -10511,7 +10522,7 @@ export default function ChatView({
                                       size="sm"
                                       variant="default"
                                       className="h-9 rounded-l-none rounded-r-full border-l-white/12 px-2 sm:h-8"
-                                      aria-label="Implementation actions"
+                                      aria-label={t("chat.composer.implementationActions")}
                                       disabled={isSendBusy || isConnecting}
                                     />
                                   }
@@ -10523,7 +10534,7 @@ export default function ChatView({
                                     disabled={isSendBusy || isConnecting}
                                     onClick={() => void onImplementPlanInNewThread()}
                                   >
-                                    Implement in a new thread
+                                    {t("chat.composer.implementNewThread")}
                                   </MenuItem>
                                 </MenuPopup>
                               </Menu>
@@ -10553,14 +10564,14 @@ export default function ChatView({
                               }
                               aria-label={
                                 isConnecting
-                                  ? "Connecting"
+                                  ? t("chat.composer.connecting")
                                   : isVoiceTranscribing
-                                    ? "Transcribing voice note"
+                                    ? t("chat.composer.transcribingVoice")
                                     : isPreparingWorktree
-                                      ? "Preparing worktree"
+                                      ? t("chat.composer.preparingWorktree")
                                       : isSendBusy
-                                        ? "Sending"
-                                        : "Send message"
+                                        ? t("chat.composer.sending")
+                                        : t("chat.composer.sendMessage")
                               }
                             >
                               {isConnecting || isSendBusy ? (
@@ -10817,18 +10828,18 @@ export default function ChatView({
                       CHAT_COLUMN_FRAME_CLASS_NAME,
                     )}
                   >
-                    <SynaraLogo aria-label="Synara logo" className="size-10" />
+                    <SynaraLogo aria-label={t("chat.synaraLogo")} className="size-10" />
                     <h2
                       data-testid="empty-landing-heading"
                       className="text-[26px] font-normal leading-[1.15] tracking-[-0.015em] text-foreground/95 sm:text-[30px]"
                     >
                       {isEmptyChatLanding ? (
-                        "What should we work on?"
+                        t("chat.emptyState.whatToWorkOn")
                       ) : (
                         <>
-                          What should we do in{" "}
+                          {t("chat.emptyState.whatToDoIn")}{" "}
                           <span className={COMPOSER_MUTED_ACCENT_TEXT_CLASS_NAME}>
-                            {activeProjectDisplayName ?? "this folder"}
+                            {activeProjectDisplayName ?? t("chat.emptyState.thisFolder")}
                           </span>
                           ?
                         </>
@@ -11080,13 +11091,13 @@ export default function ChatView({
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4 py-6 [-webkit-app-region:no-drag]"
           role="dialog"
           aria-modal="true"
-          aria-label="Expanded image preview"
+          aria-label={t("chat.imagePreview.expandedPreview")}
         >
           {/* Full-bleed backdrop click target — intentionally a raw <button> because it has no visible chrome. */}
           <button
             type="button"
             className="absolute inset-0 z-0 cursor-zoom-out"
-            aria-label="Close image preview"
+            aria-label={t("chat.imagePreview.closePreview")}
             onClick={closeExpandedImage}
           />
           {expandedImage.images.length > 1 && (
@@ -11095,7 +11106,7 @@ export default function ChatView({
               size="icon"
               variant="ghost"
               className="absolute left-2 top-1/2 z-20 -translate-y-1/2 text-white/90 hover:bg-white/10 hover:text-white sm:left-6"
-              aria-label="Previous image"
+              aria-label={t("chat.imagePreview.previousImage")}
               onClick={() => {
                 navigateExpandedImage(-1);
               }}
@@ -11110,7 +11121,7 @@ export default function ChatView({
               variant="ghost"
               className="absolute right-2 top-2"
               onClick={closeExpandedImage}
-              aria-label="Close image preview"
+              aria-label={t("chat.imagePreview.closePreview")}
             >
               <XIcon />
             </Button>
@@ -11133,7 +11144,7 @@ export default function ChatView({
               size="icon"
               variant="ghost"
               className="absolute right-2 top-1/2 z-20 -translate-y-1/2 text-white/90 hover:bg-white/10 hover:text-white sm:right-6"
-              aria-label="Next image"
+              aria-label={t("chat.imagePreview.nextImage")}
               onClick={() => {
                 navigateExpandedImage(1);
               }}

@@ -338,7 +338,52 @@
       "scrollToBottom": "Scroll to bottom"
     },
     "emptyState": {
-      "letsBuild": "Let's build"
+      "letsBuild": "Let's build",
+      "whatToWorkOn": "What should we work on?",
+      "whatToDoIn": "What should we do in",
+      "thisFolder": "this folder"
+    },
+    "loadingModels": "Loading models",
+    "temporaryChat": {
+      "ariaLabel": "Temporary chat",
+      "tooltipKeep": "Temporary chat — deleted when you leave. Click to keep it.",
+      "tooltipMake": "Make this a temporary chat (deleted when you leave)",
+      "label": "Temporary"
+    },
+    "planMode": {
+      "title": "Plan mode — click to return to normal build mode",
+      "label": "Plan"
+    },
+    "stopGeneration": {
+      "ariaLabel": "Stop generation",
+      "title": "Stop the current response. On Mac, press Ctrl+C to interrupt."
+    },
+    "composer": {
+      "sending": "Sending...",
+      "refine": "Refine",
+      "implement": "Implement",
+      "implementationActions": "Implementation actions",
+      "implementNewThread": "Implement in a new thread",
+      "connecting": "Connecting",
+      "transcribingVoice": "Transcribing voice note",
+      "preparingWorktree": "Preparing worktree",
+      "sendMessage": "Send message"
+    },
+    "placeholder": {
+      "resolveApproval": "Resolve this approval request to continue",
+      "typeAnswer": "Type your answer to continue",
+      "typeOwnAnswer": "Type your own answer, or leave this blank to use the selected option",
+      "refinePlan": "Add feedback to refine the plan, or leave this blank to implement it",
+      "followUp": "Ask for follow-up changes",
+      "followUpOrAttach": "Ask for follow-up changes or attach images",
+      "default": "Ask anything, @tag files/folders, or use / to show available commands"
+    },
+    "synaraLogo": "Synara logo",
+    "imagePreview": {
+      "expandedPreview": "Expanded image preview",
+      "closePreview": "Close image preview",
+      "previousImage": "Previous image",
+      "nextImage": "Next image"
     }
   },
   "environment": {
@@ -357,7 +402,9 @@
     },
     "automations": {
       "label": "Automations",
-      "paused": "Paused"
+      "paused": "Paused",
+      "editAutomation": "Edit automation {{name}}",
+      "automationTitle": "{{name}} - {{cadence}}"
     },
     "pinned": {
       "label": "Pinned",
@@ -798,6 +845,6 @@
   "_meta": {
     "description": "English translation file",
     "lastUpdated": "2026-07-05",
-    "totalKeys": 289
+    "totalKeys": 370
   }
 }
