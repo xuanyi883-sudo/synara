@@ -13,6 +13,7 @@ import {
 } from "@t3tools/shared/model";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { getProviderStartOptions, useAppSettings } from "~/appSettings";
 import {
@@ -162,6 +163,7 @@ function intervalOptions(current: number): readonly SelectOption[] {
 }
 
 function AutomationDetailView() {
+  const { t } = useTranslation();
   const { automationId } = Route.useParams();
   const navigate = useNavigate();
   const { settings } = useAppSettings();
@@ -219,7 +221,9 @@ function AutomationDetailView() {
               className={cn("flex items-center gap-2 sm:gap-3", CHAT_SURFACE_HEADER_HEIGHT_CLASS)}
             >
               <SidebarHeaderNavigationControls />
-              <h1 className="truncate font-heading text-sm font-medium">Automations</h1>
+              <h1 className="truncate font-heading text-sm font-medium">
+                {t("environment.automations.label")}
+              </h1>
             </div>
           </header>
           <main className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 text-sm text-muted-foreground">

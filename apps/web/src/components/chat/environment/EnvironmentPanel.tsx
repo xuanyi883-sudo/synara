@@ -232,6 +232,7 @@ export function EnvironmentPanel({
   onOpenEditorView = null,
   onClose,
 }: EnvironmentPanelProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { settings } = useAppSettings();
   const { additions, deletions, hasChanges } = diffTotals;
@@ -258,15 +259,15 @@ export function EnvironmentPanel({
       ) : null}
 
       <div className="flex items-center justify-between gap-2 px-2 pb-0.5 pt-0.5">
-        <EnvironmentPanelTitle>Environment</EnvironmentPanelTitle>
+        <EnvironmentPanelTitle>{t("environment.panel.title")}</EnvironmentPanelTitle>
         {/*
           icon-xs centers the 14px gear inside a 28/24px box, insetting it ~7/5px from the
           content edge; pull it back so the glyph's right edge lines up with the rows' chevrons
           (which sit flush against the same px-2 gutter).
         */}
         <IconButton
-          label="Panel sections"
-          tooltip="Panel sections"
+          label={t("environment.panel.sections")}
+          tooltip={t("environment.panel.sections")}
           className="-mr-[7px] sm:-mr-[5px]"
           onClick={() =>
             void navigate({
@@ -282,7 +283,7 @@ export function EnvironmentPanel({
       {isGitRepo ? (
         <EnvironmentRow
           icon={<ChangesIcon className={ENVIRONMENT_ROW_ICON_CLASS_NAME} aria-hidden />}
-          label="Changes"
+          label={t("environment.panel.changes")}
           trailing={
             hasChanges ? (
               <>
@@ -315,7 +316,7 @@ export function EnvironmentPanel({
       {settings.showEnvironmentUsage ? <EnvironmentUsageSection provider={activeProvider} /> : null}
 
       {settings.showEnvironmentRepository && githubRepository && onOpenGithubRepository ? (
-        <EnvironmentLabeledSection label="Repository">
+        <EnvironmentLabeledSection label={t("environment.panel.repository")}>
           <EnvironmentRow
             icon={<GitHubIcon className={ENVIRONMENT_ROW_ICON_CLASS_NAME} aria-hidden />}
             label={<span className="truncate">{githubRepository.nameWithOwner}</span>}

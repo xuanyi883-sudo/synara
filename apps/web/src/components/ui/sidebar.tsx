@@ -2,6 +2,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "~/lib/utils";
 import { CentralIcon } from "~/lib/central-icons";
 import { Button } from "~/components/ui/button";
@@ -434,6 +435,7 @@ function SidebarRail({
   /** `content-seam` sits on the chat column edge above the card; `sidebar-shell` stays on the sidebar container. */
   placement?: "sidebar-shell" | "content-seam";
 }) {
+  const { t } = useTranslation();
   const { open, toggleSidebar } = useSidebar();
   const sidebarInstance = React.useContext(SidebarInstanceContext);
   const side = sidebarInstance?.side ?? "left";
@@ -456,8 +458,10 @@ function SidebarRail({
   } | null>(null);
   const resolvedResizable = sidebarInstance?.resizable ?? null;
   const canResize = resolvedResizable !== null && open;
-  const railLabel = canResize ? "Resize Sidebar" : "Toggle Sidebar";
-  const railTitle = canResize ? "Drag to resize sidebar" : "Toggle Sidebar";
+  const railLabel = canResize ? t("accessibility.resizeSidebar") : t("accessibility.toggleSidebar");
+  const railTitle = canResize
+    ? t("accessibility.dragToResizeSidebar")
+    : t("accessibility.toggleSidebar");
 
   const stopResize = React.useCallback(
     (pointerId: number) => {

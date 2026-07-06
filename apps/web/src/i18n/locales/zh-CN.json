@@ -18,7 +18,34 @@
     "off": "关",
     "default": "默认",
     "unknown": "未知",
-    "notAvailable": "N/A"
+    "notAvailable": "N/A",
+    "weekdays": {
+      "short": {
+        "sun": "日",
+        "mon": "一",
+        "tue": "二",
+        "wed": "三",
+        "thu": "四",
+        "fri": "五",
+        "sat": "六"
+      }
+    },
+    "months": {
+      "short": {
+        "jan": "1月",
+        "feb": "2月",
+        "mar": "3月",
+        "apr": "4月",
+        "may": "5月",
+        "jun": "6月",
+        "jul": "7月",
+        "aug": "8月",
+        "sep": "9月",
+        "oct": "10月",
+        "nov": "11月",
+        "dec": "12月"
+      }
+    }
   },
   "sidebar": {
     "sort": {
@@ -34,7 +61,12 @@
       "devServerRunning": "开发服务器运行中",
       "paused": "已暂停",
       "forkedThread": "分叉的会话",
-      "terminalOpen": "终端已打开"
+      "terminalOpen": "终端已打开",
+      "pendingApproval": "等待审批",
+      "awaitingInput": "等待输入",
+      "working": "工作中",
+      "connecting": "连接中",
+      "planReady": "计划就绪"
     },
     "terminal": {
       "inputNeeded": "终端需要输入",
@@ -198,7 +230,75 @@
       "addProjectDescription": "在侧边栏中打开仓库或文件夹。",
       "importThreadDescription": "将本地会话附加到现有提供商会话。",
       "settingsDescription": "打开应用设置。",
-      "usageSettingsDescription": "查看提供商使用量和剩余积分。"
+      "usageSettingsDescription": "查看提供商使用量和剩余积分。",
+      "footerJumpHint": "按 ↑/↓ 导航，按 Enter 打开",
+      "enterToOpen": "按 Enter 打开",
+      "searchPlaceholder": "搜索...",
+      "noMatches": "未找到匹配项。",
+      "sectionSuggested": "建议",
+      "sectionRecent": "最近",
+      "sectionThreads": "会话",
+      "sectionProjects": "项目",
+      "sectionConfigure": "配置",
+      "untitledThread": "未命名会话",
+      "untitledProject": "未命名项目",
+      "providerLabel": "提供商",
+      "providerClaude": "Claude",
+      "providerCursor": "Cursor",
+      "providerKilo": "Kilo",
+      "providerOpenCode": "OpenCode",
+      "providerCodex": "Codex",
+      "importTitle": "从提供商导入会话",
+      "importDescription": "创建一个本地应用会话并从现有提供商 ID 恢复。",
+      "threadId": "会话 ID",
+      "sessionId": "会话 ID",
+      "pasteThreadIdCodex": "粘贴 Codex 会话 ID...",
+      "pasteSessionIdClaude": "粘贴 Claude 会话 ID...",
+      "pasteSessionIdCursor": "粘贴 Cursor 会话 ID...",
+      "pasteSessionIdKilo": "粘贴 Kilo 会话 ID...",
+      "pasteSessionIdOpenCode": "粘贴 OpenCode 会话 ID...",
+      "importHelpCodex": "现有 Codex 会话的 ID。",
+      "importHelpClaude": "现有 Claude 代理会话的 ID。",
+      "importHelpCursor": "现有 Cursor 会话的 ID。",
+      "importHelpKilo": "现有 Kilo 会话的 ID。",
+      "importHelpOpenCode": "现有 OpenCode 会话的 ID。",
+      "noConnectedProviders": "没有可用的已连接提供商。",
+      "cancel": "取消",
+      "import": "导入",
+      "importing": "导入中...",
+      "failedToImportThread": "导入会话失败。",
+      "enterProjectPath": "输入项目路径...",
+      "typeFolderPath": "输入文件夹路径以浏览。",
+      "enterFolderPath": "输入文件夹路径。",
+      "noMatchingFolders": "没有匹配的文件夹。",
+      "windowsPathsNotSupported": "此平台不支持 Windows 风格路径。",
+      "relativePathsNotSupported": "不支持相对路径。请使用绝对路径。",
+      "createAndAdd": "创建并添加",
+      "add": "添加",
+      "createAndAddProject": "按 Enter 创建 {{trimmedQuery}} 并将其添加为项目。",
+      "addingProject": "添加项目中...",
+      "failedToAddProject": "添加项目失败。",
+      "addProjectTitle": "{{label}} (Enter)",
+      "addHighlightedFolderTitle": "{{label}} 高亮文件夹 ({{modifier}} Enter)",
+      "enterToAddProject": "按 Enter 添加项目",
+      "enterToAddWithModifier": "按 {{modifier}} Enter 添加",
+      "enterToGoUp": "按 Enter 返回上一级",
+      "chatMatch": "匹配的会话",
+      "chatHits": "{{count}} 个匹配的会话",
+      "projectMatch": "匹配的项目",
+      "themeSwitchToSystem": "切换到系统主题",
+      "themeSwitchToLight": "切换到浅色主题",
+      "themeSwitchToDark": "切换到深色主题",
+      "themeSystemDescription": "跟随操作系统外观。",
+      "themeLightDescription": "使用浅色配色方案。",
+      "themeDarkDescription": "使用深色配色方案。",
+      "lightTheme": "浅色",
+      "darkTheme": "深色",
+      "lightThemes": "浅色主题",
+      "darkThemes": "深色主题",
+      "lightColorTheme": "浅色配色主题",
+      "darkColorTheme": "深色配色主题",
+      "codeThemeDescription": "应用到当前 {{theme}} 主题槽位。"
     },
     "newThread": {
       "newTerminalThread": "新终端会话",
@@ -677,12 +777,6 @@
       "label": "记事本",
       "placeholder": "在此输入"
     },
-    "automations": {
-      "label": "自动化",
-      "paused": "已暂停",
-      "editAutomation": "编辑自动化 {{name}}",
-      "automationTitle": "{{name}} - {{cadence}}"
-    },
     "pinned": {
       "label": "已固定",
       "messageUnavailable": "（消息不可用）",
@@ -738,6 +832,14 @@
       "draft": "草稿",
       "inProgress": "进行中",
       "done": "已完成"
+    },
+    "fallbackDraftTitle": "新线程",
+    "attachedReferences": "附加引用",
+    "overview": {
+      "nothingOnBoard": "看板为空",
+      "emptyDescription": "创建一个任务开始使用。",
+      "newTaskIn": "在 {{projectName}} 中创建新任务",
+      "showNMore": "显示 {{count}} 个更多"
     },
     "card": {
       "terminal": "终端",
@@ -797,6 +899,49 @@
   },
   "settings": {
     "restoreDefaults": "恢复默认设置",
+    "nav": {
+      "app": "应用",
+      "synara": "Synara",
+      "general": "通用",
+      "generalDescription": "默认提供商、线程模式和侧边栏组织。",
+      "generalEyebrow": "工作流默认值",
+      "profile": "个人资料",
+      "profileDescription": "本地活动、连续天数和可分享的统计卡片。",
+      "profileEyebrow": "我的统计",
+      "appearance": "外观",
+      "appearanceDescription": "主题、排版和时间戳格式。",
+      "appearanceEyebrow": "视觉语言",
+      "notifications": "通知",
+      "notificationsDescription": "应用内通知和桌面提醒。",
+      "notificationsEyebrow": "提醒",
+      "behavior": "行为",
+      "behaviorDescription": "流式传输、差异处理和破坏性操作确认。",
+      "behaviorEyebrow": "交互规则",
+      "shortcuts": "键盘快捷键",
+      "shortcutsDescription": "Synara 中所有可用的键盘快捷键，按上下文分组。",
+      "shortcutsEyebrow": "快捷键绑定",
+      "worktrees": "工作树",
+      "worktreesDescription": "查看和清理 Synara 创建的工作树。",
+      "worktreesEyebrow": "工作区管理",
+      "archived": "已归档",
+      "archivedDescription": "查看和恢复已归档的线程。",
+      "archivedEyebrow": "线程管理",
+      "models": "模型",
+      "modelsDescription": "Git 编写默认值和自定义模型标识。",
+      "modelsEyebrow": "AI 配置",
+      "providers": "提供商",
+      "providersDescription": "选择可见的提供商、查看 CLI 安装并更新提供商工具。",
+      "providersEyebrow": "选择器可见性",
+      "skills": "技能",
+      "skillsDescription": "各提供商中的所有技能，带有控制可用性的开关。",
+      "skillsEyebrow": "代理技能",
+      "usage": "用量",
+      "usageDescription": "每个已登录提供商的剩余配额和积分。",
+      "usageEyebrow": "限额与积分",
+      "advanced": "高级",
+      "advancedDescription": "快捷键、恢复工具和版本信息。",
+      "advancedEyebrow": "系统工具"
+    },
     "profile": {
       "couldNotLoad": "无法加载本地统计数据。",
       "tryAgain": "重试",
@@ -824,7 +969,16 @@
       "timeAm": "上午",
       "timePm": "下午",
       "prompt": "次提示",
-      "prompts": "次提示"
+      "prompts": "次提示",
+      "reasoningModes": {
+        "default": "默认",
+        "thinking": "思考",
+        "ultrathink": "超级思考"
+      },
+      "heatmap": {
+        "noUnitOnDate": "{{date}} 没有 {{unit}}",
+        "countUnitOnDate": "{{date}} 有 {{count}} {{unit}}"
+      }
     },
     "keyboardShortcuts": {
       "searchPlaceholder": "搜索快捷键…",
@@ -866,6 +1020,9 @@
       "coreDefaults": "核心默认值",
       "defaultProvider": "默认提供商",
       "defaultProviderDescription": "开始新线程或对话时使用的提供商。",
+      "language": "语言",
+      "languageDescription": "界面显示语言。",
+      "languageAria": "语言",
       "newThreads": "新线程",
       "newThreadsDescription": "开始新线程时的默认行为。",
       "defaultThreadMode": "默认线程模式",
@@ -883,6 +1040,8 @@
       "workspace": "工作区",
       "workspaceDescription": "在侧边栏中显示工作区板块。",
       "workspaceAria": "切换工作区板块",
+      "environmentPanel": "环境",
+      "environmentPanelDescription": "配置聊天环境面板中显示的内容。",
       "usage": "用量",
       "usageDescription": "在侧边栏中显示提供商用量。",
       "usageAria": "切换用量板块",
@@ -906,7 +1065,13 @@
       "projectInstructionsAria": "切换项目说明",
       "notepad": "记事本",
       "notepadDescription": "在侧边栏中显示记事本。",
-      "notepadAria": "切换记事本"
+      "notepadAria": "切换记事本",
+      "sortLabels": {
+        "recentlyActive": "最近活跃",
+        "recentlyAdded": "最近添加",
+        "manualOrder": "手动排序",
+        "newestFirst": "最新优先"
+      }
     },
     "appearance": {
       "themeAndTypography": "主题和排版",
@@ -936,6 +1101,22 @@
         "locale": "系统默认",
         "12-hour": "12 小时制（上午/下午）",
         "24-hour": "24 小时制"
+      },
+      "themeOptions": {
+        "light": "浅色",
+        "lightDescription": "始终使用浅色主题。",
+        "dark": "深色",
+        "darkDescription": "始终使用深色主题。",
+        "system": "系统",
+        "systemDescription": "跟随系统主题设置。"
+      },
+      "densityOptions": {
+        "compact": "紧凑",
+        "compactDescription": "侧边栏、编辑器和设置中的间距更紧凑。",
+        "comfortable": "舒适",
+        "comfortableDescription": "日常使用的平衡间距。",
+        "spacious": "宽松",
+        "spaciousDescription": "主工作区表面有更多呼吸空间。"
       }
     },
     "notifications": {
@@ -946,6 +1127,12 @@
       "desktopNotifications": "桌面通知",
       "desktopNotificationsDescription": "发送系统通知以通知操作完成和其他事件。",
       "desktopNotificationsAria": "切换桌面通知",
+      "desktopNotificationsUseOs": "使用系统通知",
+      "browserNotificationsEnabled": "浏览器通知已启用",
+      "browserNotificationsBlocked": "浏览器通知已阻止",
+      "browserNotificationsInsecure": "浏览器通知需要安全上下文 (HTTPS)",
+      "browserNotificationsUnsupported": "浏览器不支持通知",
+      "browserNotificationsDefault": "浏览器通知尚未启用",
       "test": "测试通知",
       "desktopUnavailable": "此环境不支持桌面通知。",
       "testNotificationTitle": "测试通知",
@@ -954,7 +1141,8 @@
       "notificationsUnavailable": "通知不可用",
       "testSentDesktopDescription": "已向您的桌面发送了一条测试通知。",
       "desktopNotSupported": "此浏览器不支持桌面通知。",
-      "testSentBrowserDescription": "已在此浏览器中触发了一条测试通知。"
+      "testSentBrowserDescription": "已在此浏览器中触发了一条测试通知。",
+      "open": "打开"
     },
     "behavior": {
       "runtimeBehavior": "运行时行为",
@@ -1102,7 +1290,11 @@
       "updateManualCommand": "请手动更新。",
       "updateFinished": "更新完成",
       "newSessionsUseRefreshed": "新的会话将使用刷新后的 CLI。",
-      "updateFailedGeneric": "更新期间发生意外错误。"
+      "updateFailedGeneric": "更新期间发生意外错误。",
+      "updateCommandFailed": "更新命令未成功完成。",
+      "stillOutdated": "更新后提供商似乎仍然过时。",
+      "requestFailed": "更新请求失败。",
+      "requestCouldNotStart": "提供商更新请求无法启动。"
     },
     "advanced": {
       "developerTools": "开发者工具",
@@ -1169,6 +1361,8 @@
     },
     "backToApp": "返回应用",
     "searchPlaceholder": "搜索设置...",
+    "sections": "设置板块",
+    "searchResults": "设置搜索结果",
     "noMatching": "无匹配的设置",
     "gitToastPreviewDescription": "Git 提交 Toast 预览",
     "gitToastPreviewOn": "预览开启",
@@ -1493,7 +1687,81 @@
     "title": "键盘快捷键",
     "description": "所有可用的键盘快捷键一览。",
     "searchPlaceholder": "搜索快捷键...",
-    "noResults": "没有匹配的快捷键"
+    "noResults": "没有匹配的快捷键",
+    "sections": {
+      "availableNow": {
+        "title": "当前可用",
+        "description": "这些反映当前的聊天和侧边栏上下文。"
+      },
+      "outsideWorkspace": "工作区模式外",
+      "outsideWorkspaceDescription": "关闭终端工作区后，数字键跳转会恢复。",
+      "inWorkspace": "工作区模式内",
+      "inWorkspaceDescription": "终端切换到工作区模式时，这些绑定生效。",
+      "projectScripts": {
+        "title": "项目脚本",
+        "description": "活动项目脚本定义的自定义快捷键。"
+      },
+      "showKeyboardShortcuts": "显示键盘快捷键",
+      "showKeyboardShortcutsDescription": "从任何地方打开此表单，无需离开当前上下文。",
+      "toggleSidebar": "切换侧边栏",
+      "toggleSidebarDescription": "折叠或展开侧边栏外壳。",
+      "addProject": "添加项目",
+      "addProjectDescription": "在侧边栏中打开文件夹选择器以导入本地项目。",
+      "searchProjects": "搜索项目和会话",
+      "searchProjectsDescription": "从应用中的任何位置打开侧边栏搜索面板。",
+      "importThread": "导入会话",
+      "importThreadDescription": "将现有会话引入当前工作区。",
+      "newThread": "新会话",
+      "newThreadDescription": "在当前项目中开始新会话，或在最近的项目中开始。",
+      "newThreadInLatestProject": "在最新项目中新建会话",
+      "newThreadInLatestProjectDescription": "跳回最近使用的项目并开始新会话。",
+      "newChat": "新聊天",
+      "newChatDescription": "打开空聊天落地页。",
+      "newTerminalThread": "新终端会话",
+      "newTerminalThreadDescription": "创建直接进入终端模式的会话。",
+      "newClaudeThread": "新 Claude 会话",
+      "newClaudeThreadDescription": "以 Claude 选中状态开始新会话。",
+      "newCodexThread": "新 Codex 会话",
+      "newCodexThreadDescription": "以 Codex 选中状态开始新会话。",
+      "newCursorThread": "新 Cursor 会话",
+      "newCursorThreadDescription": "以 Cursor 选中状态开始新会话。",
+      "newGeminiThread": "新 Gemini 会话",
+      "newGeminiThreadDescription": "以 Gemini 选中状态开始新会话。",
+      "splitChat": "分屏聊天",
+      "splitChatDescription": "在第二个面板中打开当前对话。",
+      "previousRecentView": "上一个最近视图",
+      "previousRecentViewDescription": "向后循环切换最近打开的主视图。",
+      "nextRecentView": "下一个最近视图",
+      "nextRecentViewDescription": "向前循环切换最近打开的主视图。",
+      "modelPicker": "模型选择器",
+      "modelPickerDescription": "打开编辑器提供商和模型选择器。",
+      "reasoningPicker": "推理选择器",
+      "reasoningPickerDescription": "打开编辑器推理和特质控制。",
+      "focusComposer": "聚焦编辑器",
+      "focusComposerDescription": "聚焦或取消聚焦聊天提示编辑器。",
+      "toggleTerminal": "切换终端",
+      "toggleTerminalDescription": "显示或隐藏活动会话的终端界面。",
+      "toggleDiff": "切换差异",
+      "toggleDiffDescription": "打开或关闭工作树差异面板。",
+      "toggleBrowser": "切换浏览器",
+      "toggleBrowserDescription": "显示活动会话的内置浏览器面板。",
+      "previousVisibleThread": "上一个可见会话",
+      "previousVisibleThreadDescription": "循环切换到侧边栏中当前可见的上一个会话。",
+      "nextVisibleThread": "下一个可见会话",
+      "nextVisibleThreadDescription": "循环切换到侧边栏中当前可见的下一个会话。",
+      "openInFavoriteEditor": "在偏好编辑器中打开",
+      "openInFavoriteEditorDescription": "将当前会话或工作区目标发送到您偏好的编辑器。",
+      "jumpToVisibleThread": "跳转到可见会话 {number}",
+      "jumpToVisibleThreadDescription": "直接从侧边栏数字行聚焦可见会话。",
+      "openFullWidthTerminalWorkspace": "打开全宽终端工作区",
+      "openFullWidthTerminalWorkspaceDescription": "将活动会话扩展到工作区终端布局。",
+      "focusTerminalTab": "聚焦终端标签",
+      "focusTerminalTabDescription": "将工作区切换到终端标签。",
+      "focusChatTab": "聚焦聊天标签",
+      "focusChatTabDescription": "将工作区切换回聊天标签。",
+      "closeActiveWorkspacePanel": "关闭活动工作区面板",
+      "closeActiveWorkspacePanelDescription": "关闭当前聚焦的工作区面板或标签。"
+    }
   },
   "plan": {
     "badge": "计划",
@@ -1520,14 +1788,216 @@
   },
   "image": {
     "couldNotDownload": "无法下载图片",
-    "fileUnavailable": "图片文件不可用",
+    "fileUnavailable": "图片不可用",
     "downloadImage": "下载图片",
     "download": "下载",
     "couldNotOpen": "无法在查看器中打开图片"
   },
+  "notification": {
+    "open": "打开",
+    "desktopNotificationsUseOs": "使用系统通知",
+    "browserNotificationsEnabled": "浏览器通知已启用",
+    "browserNotificationsBlocked": "浏览器通知已阻止",
+    "browserNotificationsInsecure": "浏览器通知需要安全上下文 (HTTPS)",
+    "browserNotificationsUnsupported": "浏览器不支持通知",
+    "browserNotificationsDefault": "浏览器通知尚未启用"
+  },
   "_meta": {
     "description": "中文翻译文件",
-    "lastUpdated": "2026-07-05",
-    "totalKeys": 1256
+    "lastUpdated": "2026-07-06",
+    "totalKeys": 1427
+  },
+  "automations": {
+    "templates": {
+      "triageCrashes": {
+        "label": "分类新崩溃",
+        "name": "崩溃分类"
+      },
+      "updateDependencies": {
+        "label": "更新依赖",
+        "name": "更新依赖"
+      },
+      "dailyStandup": {
+        "label": "每日站会摘要",
+        "name": "每日摘要"
+      }
+    },
+    "runStatus": {
+      "queued": "排队中",
+      "starting": "启动中",
+      "running": "运行中",
+      "waitingForApproval": "等待审批",
+      "completed": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "interrupted": "已中断",
+      "skipped": "已跳过"
+    },
+    "triageOutcome": {
+      "needsReview": "有需要 review 的内容",
+      "noFindings": "无发现",
+      "changedFiles": "已更改文件",
+      "needsAttention": "需要注意",
+      "completedOpenThread": "已完成；打开线程查看回复",
+      "completed": "已完成"
+    },
+    "relativeTime": {
+      "now": "刚刚",
+      "minutes": "{{count}} 分钟",
+      "hours": "{{count}} 小时",
+      "days": "{{count}} 天",
+      "weeks": "{{count}} 周",
+      "months": "{{count}} 个月"
+    },
+    "schedule": {
+      "label": "调度",
+      "every": "每",
+      "runAt": "运行时间",
+      "cron": "Cron",
+      "day": "日期",
+      "time": "时间",
+      "timezone": "时区",
+      "manual": "手动",
+      "once": "一次",
+      "hourly": "每小时",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每周",
+      "custom": "自定义",
+      "timezonePlaceholder": "Europe/Rome",
+      "cronPlaceholder": "0 9 * * *",
+      "stopWhenPlaceholder": "PR 已准备好合并",
+      "notScheduled": "未计划"
+    },
+    "interval": {
+      "everyNMinutes_one": "每 {{count}} 分钟",
+      "everyNMinutes_other": "每 {{count}} 分钟",
+      "everyNSeconds_one": "每 {{count}} 秒",
+      "everyNSeconds_other": "每 {{count}} 秒",
+      "everyNHours_one": "每 {{count}} 小时",
+      "everyNHours_other": "每 {{count}} 小时",
+      "preset15Min": "每 15 分钟",
+      "preset30Min": "每 30 分钟",
+      "preset2Hours": "每 2 小时",
+      "preset6Hours": "每 6 小时",
+      "preset12Hours": "每 12 小时",
+      "preset24Hours": "每 24 小时"
+    },
+    "maxIterations": {
+      "unlimited": "无限制",
+      "run_one": "{{count}} 次运行",
+      "run_other": "{{count}} 次运行",
+      "preset10": "10 次运行",
+      "preset25": "25 次运行",
+      "preset50": "50 次运行",
+      "preset100": "100 次运行",
+      "preset250": "250 次运行"
+    },
+    "worktreeMode": {
+      "auto": "自动",
+      "local": "本地",
+      "worktree": "工作树"
+    },
+    "mode": {
+      "label": "模式",
+      "standalone": "独立",
+      "heartbeat": "心跳"
+    },
+    "permissions": {
+      "label": "权限",
+      "approvalRequired": "需要审批",
+      "fullAccess": "完全访问"
+    },
+    "approval": {
+      "needed": "需要审批",
+      "description": "此自动化需要您审批一次后，Synara 才能保存更改。当警告阻止手动运行时，必须先审批才能点击“立即运行”。",
+      "approve": "审批",
+      "approveAndRun": "审批并立即运行"
+    },
+    "fastIntervalWarning": "小于一分钟的间隔需要将最大迭代次数设为 {{limit}} 次或更少。",
+    "form": {
+      "editTitle": "编辑自动化",
+      "newTitle": "新建自动化",
+      "titlePlaceholder": "自动化标题",
+      "titleAriaLabel": "自动化标题",
+      "aboutAriaLabel": "关于自动化",
+      "aboutTooltip": "自动化会按调度运行此提示，并将结果作为线程打开。",
+      "useTemplate": "使用模板",
+      "promptPlaceholder": "添加提示，例如：在 $sentry 中查找崩溃",
+      "promptAriaLabel": "自动化提示",
+      "selectProject": "选择项目",
+      "targetThread": "目标线程",
+      "noThreadsInProject": "此项目中没有线程",
+      "stopOnError": "出错时停止",
+      "maxIterations": "最大迭代次数",
+      "cancel": "取消",
+      "save": "保存",
+      "create": "创建"
+    },
+    "list": {
+      "newResult": "新结果",
+      "currentSection": "当前",
+      "pausedSection": "已暂停",
+      "needsReview": "需要 review",
+      "unreadCount": "未读 {{count}}",
+      "allCount": "全部 {{count}}",
+      "noUnreadRuns": "没有未读运行。",
+      "unknownProject": "未知项目",
+      "savedRun": "已保存运行",
+      "automationRun": "自动化运行",
+      "refreshAriaLabel": "刷新",
+      "newAutomation": "新建自动化",
+      "deleteAriaLabel": "删除自动化",
+      "deleteConfirm": "删除 \"{{name}}\"？",
+      "heartbeatMeta": "心跳 · {{target}}",
+      "fromThread": "来自 {{title}}",
+      "label": "自动化",
+      "loading": "正在加载自动化...",
+      "emptyTitle": "暂无自动化",
+      "emptyDescription": "安排提示词自动运行，或按循环唤醒现有线程。"
+    },
+    "detail": {
+      "notFound": "找不到自动化。",
+      "backToAutomations": "返回自动化列表",
+      "breadcrumb": "自动化",
+      "pause": "暂停",
+      "resume": "恢复",
+      "delete": "删除",
+      "approveFirst": "请先审批自动化",
+      "runNow": "立即运行",
+      "status": "状态",
+      "nextRun": "下次运行",
+      "lastRan": "上次运行",
+      "details": "详情",
+      "runsIn": "运行于",
+      "runsInTooltip": "自动化运行位置：工作树、本地 checkout 或自动",
+      "project": "项目",
+      "createdFrom": "创建于",
+      "threadUnavailable": "线程不可用",
+      "repeats": "重复",
+      "model": "模型",
+      "stopWhen": "停止条件",
+      "never": "永不",
+      "thread": "线程",
+      "previousRuns": "历史运行",
+      "noRunsYet": "尚无运行记录。",
+      "active": "运行中",
+      "paused": "已暂停",
+      "scheduled": "已计划",
+      "done": "已完成",
+      "read": "已读",
+      "unread": "未读",
+      "archive": "归档",
+      "unarchive": "取消归档",
+      "cancelRun": "取消运行",
+      "archiveTooltip": "归档不会删除生成的工作树或分支。",
+      "relativeTimestamp": {
+        "today": "今天 {{time}}",
+        "tomorrow": "明天 {{time}}",
+        "yesterday": "昨天 {{time}}"
+      },
+      "editAutomation": "编辑自动化 {{name}}",
+      "automationTitle": "{{name}} — {{cadence}}"
+    }
   }
 }

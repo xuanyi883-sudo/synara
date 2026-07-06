@@ -149,7 +149,10 @@ function ProviderUsageCard({
   );
 }
 
-function missingSnapshot(provider: ProviderKind): ServerProviderUsageSnapshot {
+function missingSnapshot(
+  provider: ProviderKind,
+  t: (key: string) => string,
+): ServerProviderUsageSnapshot {
   return {
     provider,
     updatedAt: new Date(0).toISOString(),
@@ -157,7 +160,7 @@ function missingSnapshot(provider: ProviderKind): ServerProviderUsageSnapshot {
     usageLines: [],
     source: "unavailable",
     status: "error",
-    detail: "Usage is currently unavailable.",
+    detail: t("settings.providerUsage.unavailable"),
   };
 }
 
@@ -202,7 +205,7 @@ export function ProviderUsageSettingsPanel() {
       byProvider.set(snapshot.provider, snapshot);
     }
     return PROVIDER_USAGE_PROVIDERS.map(
-      (provider) => byProvider.get(provider) ?? missingSnapshot(provider),
+      (provider) => byProvider.get(provider) ?? missingSnapshot(provider, t),
     );
   }, [usageQuery.data]);
 

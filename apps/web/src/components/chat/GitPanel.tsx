@@ -331,7 +331,9 @@ export function GitPanel(props: {
           </Alert>
         ) : null}
         {!error && isLoading && !hasChanges ? (
-          <p className="px-1.5 py-1 text-[11px] text-muted-foreground/70">{t("chat.gitPanel.loading")}</p>
+          <p className="px-1.5 py-1 text-[11px] text-muted-foreground/70">
+            {t("chat.gitPanel.loading")}
+          </p>
         ) : null}
         {!error && !isLoading && !hasChanges ? (
           <p className="px-1.5 py-2 text-center text-[12px] text-muted-foreground/70">
@@ -376,7 +378,9 @@ export function GitPanel(props: {
         {selectedFileDiff ? (
           <SelectedFileDiff fileDiff={selectedFileDiff} theme={theme} />
         ) : (
-          <PanelStateMessage density="compact">{t("chat.gitPanel.selectFileDiff")}</PanelStateMessage>
+          <PanelStateMessage density="compact">
+            {t("chat.gitPanel.selectFileDiff")}
+          </PanelStateMessage>
         )}
       </div>
     </div>

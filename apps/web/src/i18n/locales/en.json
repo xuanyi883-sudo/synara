@@ -18,7 +18,34 @@
     "off": "Off",
     "default": "Default",
     "unknown": "Unknown",
-    "notAvailable": "N/A"
+    "notAvailable": "N/A",
+    "weekdays": {
+      "short": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      }
+    },
+    "months": {
+      "short": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    }
   },
   "sidebar": {
     "sort": {
@@ -29,12 +56,99 @@
       "sortThreads": "Sort threads",
       "sortChats": "Sort chats"
     },
+    "searchPalette": {
+      "newChat": "New chat",
+      "newThread": "New thread",
+      "addProject": "Add project",
+      "importThread": "Import thread...",
+      "settings": "Settings",
+      "usageSettings": "Usage settings",
+      "newChatDescription": "Open the new chat home page.",
+      "newThreadDescription": "Start a new thread in the current project.",
+      "addProjectDescription": "Open a repository or folder in the sidebar.",
+      "importThreadDescription": "Attach a local thread to an existing provider session.",
+      "settingsDescription": "Open app settings.",
+      "usageSettingsDescription": "Open provider usage and remaining credits.",
+      "footerJumpHint": "Press ↑/↓ to navigate, Enter to open",
+      "enterToOpen": "Enter to open",
+      "searchPlaceholder": "Search...",
+      "noMatches": "No matches found.",
+      "sectionSuggested": "Suggested",
+      "sectionRecent": "Recent",
+      "sectionThreads": "Threads",
+      "sectionProjects": "Projects",
+      "sectionConfigure": "Configure",
+      "untitledThread": "Untitled thread",
+      "untitledProject": "Untitled project",
+      "providerLabel": "Provider",
+      "providerClaude": "Claude",
+      "providerCursor": "Cursor",
+      "providerKilo": "Kilo",
+      "providerOpenCode": "OpenCode",
+      "providerCodex": "Codex",
+      "importTitle": "Import thread from provider",
+      "importDescription": "Create a local app thread and resume it from an existing provider id.",
+      "threadId": "Thread ID",
+      "sessionId": "Session ID",
+      "pasteThreadIdCodex": "Paste Codex thread id...",
+      "pasteSessionIdClaude": "Paste Claude session id...",
+      "pasteSessionIdCursor": "Paste Cursor session id...",
+      "pasteSessionIdKilo": "Paste Kilo session id...",
+      "pasteSessionIdOpenCode": "Paste OpenCode session id...",
+      "importHelpCodex": "The id from an existing Codex thread.",
+      "importHelpClaude": "The id from an existing Claude agent session.",
+      "importHelpCursor": "The id from an existing Cursor session.",
+      "importHelpKilo": "The id from an existing Kilo session.",
+      "importHelpOpenCode": "The id from an existing OpenCode session.",
+      "noConnectedProviders": "No connected providers available.",
+      "cancel": "Cancel",
+      "import": "Import",
+      "importing": "Importing...",
+      "failedToImportThread": "Failed to import thread.",
+      "enterProjectPath": "Enter a project path...",
+      "typeFolderPath": "Type a folder path to browse.",
+      "enterFolderPath": "Enter a folder path.",
+      "noMatchingFolders": "No matching folders.",
+      "windowsPathsNotSupported": "Windows-style paths are not supported on this platform.",
+      "relativePathsNotSupported": "Relative paths are not supported. Use an absolute path.",
+      "createAndAdd": "Create and add",
+      "add": "Add",
+      "createAndAddProject": "Press Enter to create {{trimmedQuery}} and add it as a project.",
+      "addingProject": "Adding project...",
+      "failedToAddProject": "Failed to add project.",
+      "addProjectTitle": "{{label}} (Enter)",
+      "addHighlightedFolderTitle": "{{label}} highlighted folder ({{modifier}} Enter)",
+      "enterToAddProject": "Enter to add project",
+      "enterToAddWithModifier": "{{modifier}} Enter to add",
+      "enterToGoUp": "Enter to go up",
+      "chatMatch": "matching chat",
+      "chatHits": "{{count}} matching chats",
+      "projectMatch": "matching project",
+      "themeSwitchToSystem": "Switch to system theme",
+      "themeSwitchToLight": "Switch to light theme",
+      "themeSwitchToDark": "Switch to dark theme",
+      "themeSystemDescription": "Follow your operating system appearance.",
+      "themeLightDescription": "Use the light color scheme.",
+      "themeDarkDescription": "Use the dark color scheme.",
+      "lightTheme": "light",
+      "darkTheme": "dark",
+      "lightThemes": "Light themes",
+      "darkThemes": "Dark themes",
+      "lightColorTheme": "Light color theme",
+      "darkColorTheme": "Dark color theme",
+      "codeThemeDescription": "Apply to the current {{theme}} theme slot."
+    },
     "status": {
       "completed": "Completed",
       "devServerRunning": "Dev server running",
       "paused": "Paused",
       "forkedThread": "Forked thread",
-      "terminalOpen": "Terminal open"
+      "terminalOpen": "Terminal open",
+      "pendingApproval": "Pending Approval",
+      "awaitingInput": "Awaiting Input",
+      "working": "Working",
+      "connecting": "Connecting",
+      "planReady": "Plan Ready"
     },
     "terminal": {
       "inputNeeded": "Terminal needs input",
@@ -185,20 +299,6 @@
       "opening": "Opening...",
       "adding": "Adding...",
       "typePath": "Type path"
-    },
-    "searchPalette": {
-      "newChat": "New chat",
-      "newThread": "New thread",
-      "addProject": "Add project",
-      "importThread": "Import thread...",
-      "settings": "Settings",
-      "usageSettings": "Usage settings",
-      "newChatDescription": "Open the new chat home page.",
-      "newThreadDescription": "Start a new thread in the current project.",
-      "addProjectDescription": "Open a repository or folder in the sidebar.",
-      "importThreadDescription": "Attach a local thread to an existing provider session.",
-      "settingsDescription": "Open app settings.",
-      "usageSettingsDescription": "Open provider usage and remaining credits."
     },
     "newThread": {
       "newTerminalThread": "New terminal thread",
@@ -677,12 +777,6 @@
       "label": "Notepad",
       "placeholder": "Type here"
     },
-    "automations": {
-      "label": "Automations",
-      "paused": "Paused",
-      "editAutomation": "Edit automation {{name}}",
-      "automationTitle": "{{name}} - {{cadence}}"
-    },
     "pinned": {
       "label": "Pinned",
       "messageUnavailable": "(message unavailable)",
@@ -734,18 +828,20 @@
     "appendToNotepad": "Append to notepad"
   },
   "kanban": {
-    "column": {
-      "draft": "Draft",
-      "inProgress": "In Progress",
-      "done": "Done"
-    },
-    "card": {
+    "overview": {
       "terminal": "Terminal",
       "pinned": "Pinned",
       "forkedThread": "Forked thread",
       "starting": "Starting…",
       "workedFor": "Worked for {{elapsed}}"
     },
+    "column": {
+      "draft": "Draft",
+      "inProgress": "In Progress",
+      "done": "Done"
+    },
+    "fallbackDraftTitle": "New thread",
+    "attachedReferences": "Attached references",
     "columnUi": {
       "dropToSend": "Drop to send",
       "newTask": "New task",
@@ -797,6 +893,49 @@
   },
   "settings": {
     "restoreDefaults": "Restore defaults",
+    "nav": {
+      "app": "App",
+      "synara": "Synara",
+      "general": "General",
+      "generalDescription": "Default provider, thread mode, and sidebar organization.",
+      "generalEyebrow": "Workflow defaults",
+      "profile": "Profile",
+      "profileDescription": "Your local activity, streaks, and a shareable stats card.",
+      "profileEyebrow": "Your stats",
+      "appearance": "Appearance",
+      "appearanceDescription": "Theme, typography, and timestamp formatting.",
+      "appearanceEyebrow": "Visual language",
+      "notifications": "Notifications",
+      "notificationsDescription": "In-app toasts and desktop alerts.",
+      "notificationsEyebrow": "Alerts",
+      "behavior": "Behavior",
+      "behaviorDescription": "Streaming, diff handling, and destructive confirmations.",
+      "behaviorEyebrow": "Interaction rules",
+      "shortcuts": "Keyboard Shortcuts",
+      "shortcutsDescription": "Every keyboard shortcut available in Synara, grouped by context.",
+      "shortcutsEyebrow": "Key bindings",
+      "worktrees": "Worktrees",
+      "worktreesDescription": "Review and clean up the worktrees created by Synara.",
+      "worktreesEyebrow": "Workspace management",
+      "archived": "Archived",
+      "archivedDescription": "View and restore archived threads.",
+      "archivedEyebrow": "Thread management",
+      "models": "Models",
+      "modelsDescription": "Git writing defaults and custom model slugs.",
+      "modelsEyebrow": "AI configuration",
+      "providers": "Providers",
+      "providersDescription": "Choose visible providers, review CLI installs, and update provider tools.",
+      "providersEyebrow": "Picker visibility",
+      "skills": "Skills",
+      "skillsDescription": "Every skill found across providers, with toggles to control availability.",
+      "skillsEyebrow": "Agent skills",
+      "usage": "Usage",
+      "usageDescription": "Remaining quota and credits for each signed-in provider.",
+      "usageEyebrow": "Limits & credits",
+      "advanced": "Advanced",
+      "advancedDescription": "Keybindings, recovery, and version info.",
+      "advancedEyebrow": "System tools"
+    },
     "profile": {
       "couldNotLoad": "Couldn't load your local stats.",
       "tryAgain": "Try again",
@@ -824,7 +963,16 @@
       "timeAm": "AM",
       "timePm": "PM",
       "prompt": "prompt",
-      "prompts": "prompts"
+      "prompts": "prompts",
+      "reasoningModes": {
+        "default": "Default",
+        "thinking": "Thinking",
+        "ultrathink": "Ultrathink"
+      },
+      "heatmap": {
+        "noUnitOnDate": "No {{unit}} on {{date}}",
+        "countUnitOnDate": "{{count}} {{unit}} on {{date}}"
+      }
     },
     "keyboardShortcuts": {
       "searchPlaceholder": "Search shortcuts…",
@@ -866,6 +1014,9 @@
       "coreDefaults": "Core defaults",
       "defaultProvider": "Default provider",
       "defaultProviderDescription": "Provider to use when starting new threads or chats.",
+      "language": "Language",
+      "languageDescription": "Display language for the UI.",
+      "languageAria": "Language",
       "newThreads": "New threads",
       "newThreadsDescription": "Default behavior when starting a new thread.",
       "defaultThreadMode": "Default thread mode",
@@ -883,6 +1034,8 @@
       "workspace": "Workspace",
       "workspaceDescription": "Show workspace section in the sidebar.",
       "workspaceAria": "Toggle workspace section",
+      "environmentPanel": "Environment",
+      "environmentPanelDescription": "Configure what appears in the chat Environment panel.",
       "usage": "Usage",
       "usageDescription": "Show provider usage in the sidebar.",
       "usageAria": "Toggle usage section",
@@ -905,8 +1058,14 @@
       "projectInstructionsDescription": "Show project instructions in the sidebar.",
       "projectInstructionsAria": "Toggle project instructions",
       "notepad": "Notepad",
-      "notepadDescription": "Show notepad in the sidebar.",
-      "notepadAria": "Toggle notepad"
+      "notepadDescription": "Show the notepad in the sidebar.",
+      "notepadAria": "Toggle notepad",
+      "sortLabels": {
+        "recentlyActive": "Recently active",
+        "recentlyAdded": "Recently added",
+        "manualOrder": "Manual order",
+        "newestFirst": "Newest first"
+      }
     },
     "appearance": {
       "themeAndTypography": "Theme and typography",
@@ -936,6 +1095,22 @@
         "locale": "System default",
         "12-hour": "12-hour (AM/PM)",
         "24-hour": "24-hour"
+      },
+      "themeOptions": {
+        "light": "Light",
+        "lightDescription": "Always use the light theme.",
+        "dark": "Dark",
+        "darkDescription": "Always use the dark theme.",
+        "system": "System",
+        "systemDescription": "Follow the system theme setting."
+      },
+      "densityOptions": {
+        "compact": "Compact",
+        "compactDescription": "Tighter spacing in the sidebar, composer, and settings rows.",
+        "comfortable": "Comfortable",
+        "comfortableDescription": "Balanced spacing for everyday use.",
+        "spacious": "Spacious",
+        "spaciousDescription": "More breathing room across the main workspace surfaces."
       }
     },
     "notifications": {
@@ -946,6 +1121,12 @@
       "desktopNotifications": "Desktop notifications",
       "desktopNotificationsDescription": "Send system notifications for completed turns and other events.",
       "desktopNotificationsAria": "Toggle desktop notifications",
+      "desktopNotificationsUseOs": "Use system notifications",
+      "browserNotificationsEnabled": "Browser notifications enabled",
+      "browserNotificationsBlocked": "Browser notifications blocked",
+      "browserNotificationsInsecure": "Browser notifications require a secure context (HTTPS)",
+      "browserNotificationsUnsupported": "Browser notifications not supported",
+      "browserNotificationsDefault": "Browser notifications not yet enabled",
       "test": "Test notification",
       "desktopUnavailable": "Desktop notifications are not available in this environment.",
       "testNotificationTitle": "Test notification",
@@ -954,7 +1135,8 @@
       "notificationsUnavailable": "Notifications unavailable",
       "testSentDesktopDescription": "A test notification was sent to your desktop.",
       "desktopNotSupported": "Desktop notifications are not supported in this browser.",
-      "testSentBrowserDescription": "A test notification was triggered in this browser."
+      "testSentBrowserDescription": "A test notification was triggered in this browser.",
+      "open": "Open"
     },
     "behavior": {
       "runtimeBehavior": "Runtime behavior",
@@ -1102,7 +1284,11 @@
       "updateManualCommand": "Please update manually.",
       "updateFinished": "Update finished",
       "newSessionsUseRefreshed": "New sessions will use the refreshed CLI.",
-      "updateFailedGeneric": "An unexpected error occurred during the update."
+      "updateFailedGeneric": "An unexpected error occurred during the update.",
+      "updateCommandFailed": "The update command did not complete successfully.",
+      "stillOutdated": "The provider still appears outdated after updating.",
+      "requestFailed": "The update request failed.",
+      "requestCouldNotStart": "The provider update request could not start."
     },
     "advanced": {
       "developerTools": "Developer tools",
@@ -1169,6 +1355,8 @@
     },
     "backToApp": "Back to app",
     "searchPlaceholder": "Search settings...",
+    "sections": "Settings sections",
+    "searchResults": "Settings search results",
     "noMatching": "No matching settings",
     "gitToastPreviewDescription": "Git commit toast preview",
     "gitToastPreviewOn": "Preview on",
@@ -1493,7 +1681,81 @@
     "title": "Keyboard shortcuts",
     "description": "All available keyboard shortcuts in one place.",
     "searchPlaceholder": "Search shortcuts...",
-    "noResults": "No shortcuts match your search"
+    "noResults": "No shortcuts match your search",
+    "sections": {
+      "availableNow": {
+        "title": "Available now",
+        "description": "These reflect the current chat and sidebar context."
+      },
+      "outsideWorkspace": "Outside workspace mode",
+      "outsideWorkspaceDescription": "Number-row jumps return when the terminal workspace is closed.",
+      "inWorkspace": "In workspace mode",
+      "inWorkspaceDescription": "These bindings take over when the terminal switches into workspace mode.",
+      "projectScripts": {
+        "title": "Project scripts",
+        "description": "Custom shortcuts defined for the active project's scripts."
+      },
+      "showKeyboardShortcuts": "Show keyboard shortcuts",
+      "showKeyboardShortcutsDescription": "Open this sheet from anywhere without leaving your current context.",
+      "toggleSidebar": "Toggle sidebar",
+      "toggleSidebarDescription": "Collapse or reveal the sidebar shell.",
+      "addProject": "Add project",
+      "addProjectDescription": "Open the folder picker to import a local project into the sidebar.",
+      "searchProjects": "Search projects and threads",
+      "searchProjectsDescription": "Open the sidebar search palette from anywhere in the app.",
+      "importThread": "Import thread",
+      "importThreadDescription": "Bring an existing conversation into the current workspace.",
+      "newThread": "New thread",
+      "newThreadDescription": "Start a fresh thread in the current project, or the most recent one.",
+      "newThreadInLatestProject": "New thread in latest project",
+      "newThreadInLatestProjectDescription": "Jump back into the most recently used project with a new thread.",
+      "newChat": "New chat",
+      "newChatDescription": "Open the empty chat landing view.",
+      "newTerminalThread": "New terminal thread",
+      "newTerminalThreadDescription": "Create a thread that opens directly into terminal mode.",
+      "newClaudeThread": "New Claude thread",
+      "newClaudeThreadDescription": "Start a fresh thread with Claude selected.",
+      "newCodexThread": "New Codex thread",
+      "newCodexThreadDescription": "Start a fresh thread with Codex selected.",
+      "newCursorThread": "New Cursor thread",
+      "newCursorThreadDescription": "Start a fresh thread with Cursor selected.",
+      "newGeminiThread": "New Gemini thread",
+      "newGeminiThreadDescription": "Start a fresh thread with Gemini selected.",
+      "splitChat": "Split chat",
+      "splitChatDescription": "Open the current conversation in a second pane.",
+      "previousRecentView": "Previous recent view",
+      "previousRecentViewDescription": "Cycle backward through recently opened primary views.",
+      "nextRecentView": "Next recent view",
+      "nextRecentViewDescription": "Cycle forward through recently opened primary views.",
+      "modelPicker": "Model picker",
+      "modelPickerDescription": "Open the composer provider and model picker.",
+      "reasoningPicker": "Reasoning picker",
+      "reasoningPickerDescription": "Open the composer reasoning and trait controls.",
+      "focusComposer": "Focus composer",
+      "focusComposerDescription": "Focus or blur the chat prompt composer.",
+      "toggleTerminal": "Toggle terminal",
+      "toggleTerminalDescription": "Show or hide the terminal surface for the active thread.",
+      "toggleDiff": "Toggle diff",
+      "toggleDiffDescription": "Open or close the working tree diff panel.",
+      "toggleBrowser": "Toggle browser",
+      "toggleBrowserDescription": "Reveal the built-in browser panel for the active thread.",
+      "previousVisibleThread": "Previous visible thread",
+      "previousVisibleThreadDescription": "Cycle to the previous thread that is currently visible in the sidebar.",
+      "nextVisibleThread": "Next visible thread",
+      "nextVisibleThreadDescription": "Cycle to the next thread that is currently visible in the sidebar.",
+      "openInFavoriteEditor": "Open in favorite editor",
+      "openInFavoriteEditorDescription": "Send the current thread or workspace target to your preferred editor.",
+      "jumpToVisibleThread": "Jump to visible thread {number}",
+      "jumpToVisibleThreadDescription": "Focus a visible thread directly from the sidebar number row.",
+      "openFullWidthTerminalWorkspace": "Open full-width terminal workspace",
+      "openFullWidthTerminalWorkspaceDescription": "Expand the active thread into the workspace terminal layout.",
+      "focusTerminalTab": "Focus terminal tab",
+      "focusTerminalTabDescription": "Switch the workspace to the terminal tab.",
+      "focusChatTab": "Focus chat tab",
+      "focusChatTabDescription": "Switch the workspace back to the chat tab.",
+      "closeActiveWorkspacePanel": "Close active workspace panel",
+      "closeActiveWorkspacePanelDescription": "Close the currently focused workspace panel or tab."
+    }
   },
   "plan": {
     "badge": "Plan",
@@ -1525,9 +1787,211 @@
     "download": "Download",
     "couldNotOpen": "Could not open image in viewer"
   },
+  "notification": {
+    "open": "Open",
+    "desktopNotificationsUseOs": "Use system notifications",
+    "browserNotificationsEnabled": "Browser notifications enabled",
+    "browserNotificationsBlocked": "Browser notifications blocked",
+    "browserNotificationsInsecure": "Browser notifications require a secure context (HTTPS)",
+    "browserNotificationsUnsupported": "Browser notifications not supported",
+    "browserNotificationsDefault": "Browser notifications not yet enabled"
+  },
   "_meta": {
     "description": "English translation file",
-    "lastUpdated": "2026-07-05",
-    "totalKeys": 1256
+    "lastUpdated": "2026-07-06",
+    "totalKeys": 1427
+  },
+  "automations": {
+    "templates": {
+      "triageCrashes": {
+        "label": "Triage new crashes",
+        "name": "Triage crashes"
+      },
+      "updateDependencies": {
+        "label": "Update dependencies",
+        "name": "Update dependencies"
+      },
+      "dailyStandup": {
+        "label": "Daily standup summary",
+        "name": "Daily summary"
+      }
+    },
+    "runStatus": {
+      "queued": "Queued",
+      "starting": "Starting",
+      "running": "Running",
+      "waitingForApproval": "Waiting for approval",
+      "completed": "Completed",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "interrupted": "Interrupted",
+      "skipped": "Skipped"
+    },
+    "triageOutcome": {
+      "needsReview": "Found something to review",
+      "noFindings": "No findings",
+      "changedFiles": "Changed files",
+      "needsAttention": "Needs attention",
+      "completedOpenThread": "Completed; open the thread for the reply",
+      "completed": "Completed"
+    },
+    "relativeTime": {
+      "now": "now",
+      "minutes": "{{count}}m",
+      "hours": "{{count}}h",
+      "days": "{{count}}d",
+      "weeks": "{{count}}w",
+      "months": "{{count}}mo"
+    },
+    "schedule": {
+      "label": "Schedule",
+      "every": "Every",
+      "runAt": "Run at",
+      "cron": "Cron",
+      "day": "Day",
+      "time": "Time",
+      "timezone": "Timezone",
+      "manual": "Manual",
+      "once": "Once",
+      "hourly": "Hourly",
+      "daily": "Daily",
+      "weekdays": "Weekdays",
+      "weekly": "Weekly",
+      "custom": "Custom",
+      "timezonePlaceholder": "Europe/Rome",
+      "cronPlaceholder": "0 9 * * *",
+      "stopWhenPlaceholder": "PR is ready to merge",
+      "notScheduled": "Not scheduled"
+    },
+    "interval": {
+      "everyNMinutes_one": "Every {{count}} min",
+      "everyNMinutes_other": "Every {{count}} mins",
+      "everyNSeconds_one": "Every {{count}} sec",
+      "everyNSeconds_other": "Every {{count}} secs",
+      "everyNHours_one": "Every {{count}} hour",
+      "everyNHours_other": "Every {{count}} hours",
+      "preset15Min": "Every 15 min",
+      "preset30Min": "Every 30 min",
+      "preset2Hours": "Every 2 hours",
+      "preset6Hours": "Every 6 hours",
+      "preset12Hours": "Every 12 hours",
+      "preset24Hours": "Every 24 hours"
+    },
+    "maxIterations": {
+      "unlimited": "Unlimited",
+      "run_one": "{{count}} run",
+      "run_other": "{{count}} runs",
+      "preset10": "10 runs",
+      "preset25": "25 runs",
+      "preset50": "50 runs",
+      "preset100": "100 runs",
+      "preset250": "250 runs"
+    },
+    "worktreeMode": {
+      "auto": "Auto",
+      "local": "Local",
+      "worktree": "Worktree"
+    },
+    "mode": {
+      "label": "Mode",
+      "standalone": "Standalone",
+      "heartbeat": "Heartbeat"
+    },
+    "permissions": {
+      "label": "Permissions",
+      "approvalRequired": "Approval required",
+      "fullAccess": "Full access"
+    },
+    "approval": {
+      "needed": "Approval needed",
+      "description": "This automation needs your approval once before Synara can save changes. When a warning blocks manual runs, Run now stays disabled until you approve it.",
+      "approve": "Approve",
+      "approveAndRun": "Approve & run now"
+    },
+    "fastIntervalWarning": "Intervals under one minute need max iterations set to {{limit}} runs or fewer.",
+    "form": {
+      "editTitle": "Edit automation",
+      "newTitle": "New automation",
+      "titlePlaceholder": "Automation title",
+      "titleAriaLabel": "Automation title",
+      "aboutAriaLabel": "About automations",
+      "aboutTooltip": "Automations run this prompt on a schedule and open the result as a thread.",
+      "useTemplate": "Use template",
+      "promptPlaceholder": "Add prompt e.g. look for crashes in $sentry",
+      "promptAriaLabel": "Automation prompt",
+      "selectProject": "Select project",
+      "targetThread": "Target thread",
+      "noThreadsInProject": "No threads in this project",
+      "stopOnError": "Stop on error",
+      "maxIterations": "Max iterations",
+      "cancel": "Cancel",
+      "save": "Save",
+      "create": "Create"
+    },
+    "list": {
+      "newResult": "New result",
+      "currentSection": "Current",
+      "pausedSection": "Paused",
+      "needsReview": "Needs review",
+      "unreadCount": "Unread {{count}}",
+      "allCount": "All {{count}}",
+      "noUnreadRuns": "No unread runs.",
+      "unknownProject": "Unknown project",
+      "savedRun": "Saved run",
+      "automationRun": "Automation run",
+      "refreshAriaLabel": "Refresh",
+      "newAutomation": "New automation",
+      "deleteAriaLabel": "Delete automation",
+      "deleteConfirm": "Delete \"{{name}}\"?",
+      "heartbeatMeta": "Heartbeat · {{target}}",
+      "fromThread": "From {{title}}",
+      "label": "Automations",
+      "loading": "Loading automations...",
+      "emptyTitle": "No automations yet",
+      "emptyDescription": "Schedule a prompt to run on its own, or wake an existing thread on a loop."
+    },
+    "detail": {
+      "notFound": "Automation not found.",
+      "backToAutomations": "Back to automations",
+      "breadcrumb": "Automations",
+      "pause": "Pause",
+      "resume": "Resume",
+      "delete": "Delete",
+      "approveFirst": "Approve the automation first",
+      "runNow": "Run now",
+      "status": "Status",
+      "nextRun": "Next run",
+      "lastRan": "Last ran",
+      "details": "Details",
+      "runsIn": "Runs in",
+      "runsInTooltip": "Where the automation runs: a worktree, a local checkout, or auto",
+      "project": "Project",
+      "createdFrom": "Created from",
+      "threadUnavailable": "Thread unavailable",
+      "repeats": "Repeats",
+      "model": "Model",
+      "stopWhen": "Stop when",
+      "never": "Never",
+      "thread": "Thread",
+      "previousRuns": "Previous runs",
+      "noRunsYet": "No runs yet.",
+      "active": "Active",
+      "paused": "Paused",
+      "scheduled": "Scheduled",
+      "done": "Done",
+      "read": "Read",
+      "unread": "Unread",
+      "archive": "Archive",
+      "unarchive": "Unarchive",
+      "cancelRun": "Cancel run",
+      "archiveTooltip": "Archiving does not remove generated worktrees or branches.",
+      "relativeTimestamp": {
+        "today": "Today at {{time}}",
+        "tomorrow": "Tomorrow at {{time}}",
+        "yesterday": "Yesterday at {{time}}"
+      },
+      "editAutomation": "Edit automation {{name}}",
+      "automationTitle": "{{name}} — {{cadence}}"
+    }
   }
 }

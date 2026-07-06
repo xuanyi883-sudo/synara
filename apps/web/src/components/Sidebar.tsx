@@ -93,6 +93,7 @@ import {
   useAppSettings,
 } from "../appSettings";
 import { isElectron } from "../env";
+import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { showConfirmDialogFallback } from "../confirmDialogFallback";
 import { formatRelativeTime } from "../lib/relativeTime";
@@ -366,15 +367,20 @@ const THREAD_PREVIEW_PAGE_SIZE = 5;
 // How long the "Undo archive" toast lingers (visible time only — it pauses while
 // the tab is hidden) before auto-dismissing.
 const ARCHIVE_UNDO_TOAST_DURATION_MS = 8000;
-const SIDEBAR_SORT_LABELS: Record<SidebarProjectSortOrder, string> = {
-  updated_at: "Last user message",
-  created_at: "Created at",
-  manual: "Manual",
-};
-const SIDEBAR_THREAD_SORT_LABELS: Record<SidebarThreadSortOrder, string> = {
-  updated_at: "Last user message",
-  created_at: "Created at",
-};
+function getSidebarSortLabels(t: TFunction): Record<SidebarProjectSortOrder, string> {
+  return {
+    updated_at: t("sidebar.sort.lastUserMessage"),
+    created_at: t("sidebar.sort.createdAt"),
+    manual: t("sidebar.sort.manual"),
+  };
+}
+
+function getSidebarThreadSortLabels(t: TFunction): Record<SidebarThreadSortOrder, string> {
+  return {
+    updated_at: t("sidebar.sort.lastUserMessage"),
+    created_at: t("sidebar.sort.createdAt"),
+  };
+}
 const SIDEBAR_LIST_ANIMATION_OPTIONS = {
   duration: 180,
   easing: "ease-out",
@@ -552,10 +558,11 @@ function SidebarStatusTrailingGlyph({ status }: { status: ThreadStatusPill }) {
 
 /** Pulsing green dot shown before a project name while a dev run is live. */
 function ProjectRunIndicatorDot({ className }: { className?: string }) {
+  const { t } = useTranslation();
   return (
     <span
       aria-hidden="true"
-      title="Dev server running"
+      title={t("sidebar.status.devServerRunning")}
       className={cn(
         "size-1.5 shrink-0 rounded-full bg-emerald-400 motion-safe:animate-pulse",
         className,
@@ -987,7 +994,7 @@ function ProjectSortMenu({
       >
         <MenuGroup>
           <div className="px-2 py-1 sm:text-xs font-medium text-muted-foreground">
-            Sort projects
+            {t("sidebar.sort.sortProjects")}
           </div>
           <MenuRadioGroup
             value={projectSortOrder}
@@ -995,18 +1002,18 @@ function ProjectSortMenu({
               onProjectSortOrderChange(value as SidebarProjectSortOrder);
             }}
           >
-            {(Object.entries(SIDEBAR_SORT_LABELS) as Array<[SidebarProjectSortOrder, string]>).map(
-              ([value, label]) => (
-                <MenuRadioItem key={value} value={value} className="min-h-7 py-1 sm:text-xs">
-                  {label}
-                </MenuRadioItem>
-              ),
-            )}
+            {(
+              Object.entries(getSidebarSortLabels(t)) as Array<[SidebarProjectSortOrder, string]>
+            ).map(([value, label]) => (
+              <MenuRadioItem key={value} value={value} className="min-h-7 py-1 sm:text-xs">
+                {label}
+              </MenuRadioItem>
+            ))}
           </MenuRadioGroup>
         </MenuGroup>
         <MenuGroup>
           <div className="px-2 pt-2 pb-1 sm:text-xs font-medium text-muted-foreground">
-            Sort threads
+            {t("sidebar.sort.sortThreads")}
           </div>
           <ThreadSortMenuItems
             threadSortOrder={threadSortOrder}
@@ -1025,6 +1032,7 @@ function ThreadSortMenuItems({
   threadSortOrder: SidebarThreadSortOrder;
   onThreadSortOrderChange: (sortOrder: SidebarThreadSortOrder) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <MenuRadioGroup
       value={threadSortOrder}
@@ -1032,13 +1040,13 @@ function ThreadSortMenuItems({
         onThreadSortOrderChange(value as SidebarThreadSortOrder);
       }}
     >
-      {(Object.entries(SIDEBAR_THREAD_SORT_LABELS) as Array<[SidebarThreadSortOrder, string]>).map(
-        ([value, label]) => (
-          <MenuRadioItem key={value} value={value} className="min-h-7 py-1 sm:text-xs">
-            {label}
-          </MenuRadioItem>
-        ),
-      )}
+      {(
+        Object.entries(getSidebarThreadSortLabels(t)) as Array<[SidebarThreadSortOrder, string]>
+      ).map(([value, label]) => (
+        <MenuRadioItem key={value} value={value} className="min-h-7 py-1 sm:text-xs">
+          {label}
+        </MenuRadioItem>
+      ))}
     </MenuRadioGroup>
   );
 }
@@ -3374,7 +3382,7 @@ export default function Sidebar() {
       const clicked = await api.contextMenu.show(
         [
           { id: "rename", label: t("sidebar.contextMenu.renameThread") },
-          { id: "toggle-pin", label: pinActionLabel("thread", isPinned) },
+          { id: "toggle-pin", label: pinActionLabel("thread", isPinned, t) },
           ...(threadStatus?.dismissible
             ? [{ id: "clear-notification", label: t("sidebar.contextMenu.clearNotification") }]
             : []),
@@ -4707,8 +4715,8 @@ export default function Sidebar() {
     return (
       <SidebarIconButton
         icon={HiOutlineArchiveBox}
-        label="Archive thread"
-        title="Archive thread"
+        label={t("sidebar.archive.archiveThread")}
+        title={t("sidebar.archive.archiveThread")}
         data-testid={`thread-archive-${threadId}`}
         size={compact ? "sm" : "md"}
         // Match the pin and the right-side meta chips (shared trailing-icon size); subagent
@@ -4992,10 +5000,10 @@ export default function Sidebar() {
               </span>
               {!isSubagentThread && threadStatus?.label === "Pending Approval" ? (
                 <span
-                  aria-label="Pending approval"
+                  aria-label={t("sidebar.status.pendingApproval")}
                   className={cn("shrink-0 text-[10px] font-medium", threadStatus.colorClass)}
                 >
-                  Pending
+                  {t("sidebar.status.pendingLabel")}
                 </span>
               ) : null}
             </div>
@@ -5108,6 +5116,8 @@ export default function Sidebar() {
     const toggleButtonClassName = isHighlighted
       ? "border-[color:var(--color-border)] bg-[var(--color-background-button-secondary)] text-[var(--color-text-foreground-secondary)] hover:bg-[var(--color-background-button-secondary-hover)] hover:text-[var(--color-text-foreground)]"
       : "border-[color:var(--color-border-light)] bg-[var(--color-background-elevated-secondary)] text-[var(--color-text-foreground-secondary)] hover:border-[color:var(--color-border)] hover:bg-[var(--color-background-button-secondary-hover)] hover:text-[var(--color-text-foreground)]";
+    const expandLabel = t("common.expand", { label: childCountLabel });
+    const collapseLabel = t("common.collapse", { label: childCountLabel });
     const hoverAnchorId = createSidebarThreadHoverAnchorId({
       scope: topLevel ? "chat" : "project",
       threadId: thread.id,
@@ -5260,39 +5270,41 @@ export default function Sidebar() {
               </span>
               {!isSubagentThread && threadStatus?.label === "Pending Approval" ? (
                 <span
-                  aria-label="Pending approval"
+                  aria-label={t("sidebar.status.pendingApproval")}
                   className={cn("shrink-0 text-[10px] font-medium", threadStatus.colorClass)}
                 >
-                  Pending
+                  {t("sidebar.status.pendingLabel")}
                 </span>
               ) : null}
             </div>
             <div className="ml-auto flex shrink-0 items-center gap-1.5 pr-1">
               {canToggleSubagents ? (
-                <button
-                  type="button"
-                  data-thread-selection-safe
-                  aria-label={`${isExpanded ? "Collapse" : "Expand"} ${childCountLabel}`}
-                  title={childCountLabel}
-                  className={cn(
-                    "inline-flex h-5 min-w-5 items-center justify-center gap-0.5 rounded-full border px-[5px] transition-colors",
-                    toggleButtonClassName,
-                  )}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    toggleSubagentParent(thread.id);
-                  }}
-                >
-                  <span className="text-[9px] font-medium leading-none tabular-nums">
-                    {childCount}
-                  </span>
-                  {isExpanded ? (
-                    <SidebarGlyph icon={ChevronDownIcon} variant="chevron" />
-                  ) : (
-                    <SidebarGlyph icon={ChevronRightIcon} variant="chevron" />
-                  )}
-                </button>
+                <TooltipTrigger>
+                  <button
+                    type="button"
+                    data-thread-selection-safe
+                    aria-label={isExpanded ? collapseLabel : expandLabel}
+                    title={childCountLabel}
+                    className={cn(
+                      "inline-flex h-5 min-w-5 items-center justify-center gap-0.5 rounded-full border px-[5px] transition-colors",
+                      toggleButtonClassName,
+                    )}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      toggleSubagentParent(thread.id);
+                    }}
+                  >
+                    <span className="text-[9px] font-medium leading-none tabular-nums">
+                      {childCount}
+                    </span>
+                    {isExpanded ? (
+                      <SidebarGlyph icon={ChevronDownIcon} variant="chevron" />
+                    ) : (
+                      <SidebarGlyph icon={ChevronRightIcon} variant="chevron" />
+                    )}
+                  </button>
+                </TooltipTrigger>
               ) : null}
               {showCompactMeta && isTemporaryThread && !thread.sidechatSourceThreadId ? (
                 <Tooltip>
@@ -5465,9 +5477,9 @@ export default function Sidebar() {
             </SidebarMenuButton>
             <button
               type="button"
-              aria-label={pinActionLabel(project.name, isProjectPinned)}
+              aria-label={pinActionLabel(project.name, isProjectPinned, t)}
               aria-pressed={isProjectPinned}
-              title={pinActionLabel(project.name, isProjectPinned)}
+              title={pinActionLabel(project.name, isProjectPinned, t)}
               className={cn(
                 "sidebar-icon-button absolute left-2 top-1/2 z-20 inline-flex size-4 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm transition-opacity hover:text-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
                 SIDEBAR_ROW_LABEL_TEXT_CLASS_NAME,
@@ -5490,11 +5502,13 @@ export default function Sidebar() {
             <SidebarSectionToolbar placement="overlay" revealOnHover>
               <SidebarIconButton
                 icon={TerminalIcon}
-                label={`Create new terminal thread in ${project.name}`}
+                label={t("sidebar.newThread.newTerminalThread")}
                 tooltip={
                   newTerminalThreadShortcutLabel
-                    ? `New terminal thread (${newTerminalThreadShortcutLabel})`
-                    : "New terminal thread"
+                    ? t("sidebar.newThread.newThreadWithShortcut", {
+                        shortcut: newTerminalThreadShortcutLabel,
+                      })
+                    : t("sidebar.newThread.newTerminalThread")
                 }
                 tooltipSide="top"
                 onClick={(event) => {
@@ -5510,9 +5524,13 @@ export default function Sidebar() {
               />
               <SidebarIconButton
                 icon={NewThreadIcon}
-                label={`Create new thread in ${project.name}`}
+                label={t("sidebar.primaryActions.newThread")}
                 tooltip={
-                  newThreadShortcutLabel ? `New thread (${newThreadShortcutLabel})` : "New thread"
+                  newThreadShortcutLabel
+                    ? t("sidebar.newThread.newThreadWithShortcut", {
+                        shortcut: newThreadShortcutLabel,
+                      })
+                    : t("sidebar.primaryActions.newThread")
                 }
                 tooltipSide="top"
                 data-testid="new-thread-button"
@@ -5978,29 +5996,29 @@ export default function Sidebar() {
     () => [
       {
         id: "new-chat",
-        label: "New chat",
-        description: "Open the new chat landing screen.",
+        label: t("sidebar.searchPalette.newChat"),
+        description: t("sidebar.searchPalette.newChatDescription"),
         keywords: ["chat", "new", "home"],
         shortcutLabel: newChatShortcutLabel,
       },
       {
         id: "new-thread",
-        label: "New thread",
-        description: "Start a fresh thread in the current project.",
+        label: t("sidebar.searchPalette.newThread"),
+        description: t("sidebar.searchPalette.newThreadDescription"),
         keywords: ["thread", "new", "project"],
         shortcutLabel: newThreadShortcutLabel,
       },
       {
         id: "add-project",
-        label: "Add project",
-        description: "Open a repository or folder in the sidebar.",
+        label: t("sidebar.searchPalette.addProject"),
+        description: t("sidebar.searchPalette.addProjectDescription"),
         keywords: ["folder", "repo", "repository", "open"],
         shortcutLabel: addProjectShortcutLabel,
       },
       {
         id: "import-thread",
-        label: "Import thread from...",
-        description: "Attach a local thread to an existing provider session.",
+        label: t("sidebar.searchPalette.importThread"),
+        description: t("sidebar.searchPalette.importThreadDescription"),
         keywords: [
           "import",
           "resume",
@@ -6015,14 +6033,14 @@ export default function Sidebar() {
       },
       {
         id: "settings",
-        label: "Settings",
-        description: "Open app settings.",
+        label: t("sidebar.searchPalette.settings"),
+        description: t("sidebar.searchPalette.settingsDescription"),
         keywords: ["preferences", "config"],
       },
       {
         id: "usage-settings",
-        label: "Usage settings",
-        description: "Open provider usage and remaining credits.",
+        label: t("sidebar.searchPalette.usageSettings"),
+        description: t("sidebar.searchPalette.usageSettingsDescription"),
         keywords: ["usage", "limits", "credits", "quota", "providers"],
         shortcutLabel: usageSettingsShortcutLabel,
       },
@@ -6374,12 +6392,12 @@ export default function Sidebar() {
                   <>
                     <SidebarPrimaryAction
                       icon={NewThreadIcon}
-                      label="New thread"
+                      label={t("sidebar.primaryActions.newThread")}
                       onClick={handlePrimaryNewThread}
                     />
                     <SidebarPrimaryAction
                       icon={SearchIcon}
-                      label="Search"
+                      label={t("sidebar.primaryActions.search")}
                       active={searchPaletteOpen}
                       onClick={() => {
                         setSearchPaletteOpen(true);
@@ -6388,7 +6406,7 @@ export default function Sidebar() {
                     />
                     <SidebarPrimaryAction
                       icon={KanbanIcon}
-                      label="Kanban"
+                      label={t("sidebar.primaryActions.kanban")}
                       active={isOnKanban}
                       onClick={() => {
                         void navigate({ to: "/kanban" });
@@ -6396,7 +6414,7 @@ export default function Sidebar() {
                     />
                     <SidebarPrimaryAction
                       icon={ClockIcon}
-                      label="Automations"
+                      label={t("sidebar.primaryActions.automations")}
                       active={isOnAutomations}
                       badgeCount={automationAttentionBadgeCount}
                       onClick={() => {
@@ -6412,7 +6430,9 @@ export default function Sidebar() {
               <SidebarGroup className="px-1.5 pt-1 pb-1.5">
                 <div className="my-2 h-px w-full bg-border" />
                 <div className="mb-1.5 flex items-center px-2">
-                  <span className={SIDEBAR_SECTION_LABEL_CLASS_NAME}>Workspace</span>
+                  <span className={SIDEBAR_SECTION_LABEL_CLASS_NAME}>
+                    {t("sidebar.sections.workspace")}
+                  </span>
                 </div>
 
                 <DndContext
@@ -6526,7 +6546,9 @@ export default function Sidebar() {
                 {pinnedThreads.length > 0 ? (
                   <div className="mb-3">
                     <div className="my-1 flex items-center justify-between px-2 py-1">
-                      <span className={SIDEBAR_SECTION_LABEL_CLASS_NAME}>Pinned</span>
+                      <span className={SIDEBAR_SECTION_LABEL_CLASS_NAME}>
+                        {t("sidebar.sections.pinned")}
+                      </span>
                     </div>
                     <div className="flex flex-col gap-0.5">
                       {pinnedThreads.map((thread) => renderPinnedThreadRow(thread))}
@@ -6540,7 +6562,7 @@ export default function Sidebar() {
                       SIDEBAR_SECTION_LABEL_CLASS_NAME,
                     )}
                   >
-                    <span className="truncate">Projects</span>
+                    <span className="truncate">{t("sidebar.sections.projects")}</span>
                   </div>
                   <SidebarSectionToolbar placement="overlay" revealOnHover>
                     {standardProjects.length > 0 ? (
@@ -6619,7 +6641,7 @@ export default function Sidebar() {
                           onClick={() => setShowManualPathInput(true)}
                         >
                           <SidebarGlyph icon={TbCursorText} variant="chrome" />
-                          Type path
+                          {t("sidebar.addProject.typePath")}
                         </button>
                       </div>
                     ) : (
@@ -6653,7 +6675,7 @@ export default function Sidebar() {
                           className="shrink-0 px-2.5 py-1.5 text-xs font-medium text-muted-foreground/50 transition-colors hover:text-foreground disabled:opacity-40"
                           onClick={handleAddProject}
                           disabled={!canAddProject}
-                          aria-label="Add project"
+                          aria-label={t("sidebar.addProject.addProject")}
                         >
                           {isAddingProject ? "..." : "↵"}
                         </button>
@@ -6708,10 +6730,10 @@ export default function Sidebar() {
                   <div
                     className="space-y-2 px-2 pt-4"
                     aria-live="polite"
-                    aria-label="Loading projects"
+                    aria-label={t("sidebar.emptyStates.loadingProjectsAriaLabel")}
                   >
                     <div className="text-center text-[length:var(--app-font-size-ui,12px)] text-muted-foreground/58">
-                      Loading projects...
+                      {t("sidebar.emptyStates.loadingProjects")}
                     </div>
                     <div className="mx-auto grid w-full max-w-42 gap-1.5 opacity-70">
                       <div className="h-2 rounded-full bg-muted/55 animate-pulse" />
@@ -6723,7 +6745,7 @@ export default function Sidebar() {
 
                 {projectEmptyState === "empty" && (
                   <div className="px-2 pt-4 text-center text-[length:var(--app-font-size-ui,12px)] text-muted-foreground/58">
-                    No projects yet
+                    {t("sidebar.emptyStates.noProjects")}
                   </div>
                 )}
               </SidebarGroup>
@@ -6752,7 +6774,7 @@ export default function Sidebar() {
                 >
                   <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
                     <span className="truncate font-system-ui text-[length:var(--app-font-size-ui,12px)] font-normal text-muted-foreground/79">
-                      Chats
+                      {t("sidebar.sections.chats")}
                     </span>
                     <DisclosureChevron
                       open={chatSectionExpanded}
@@ -6792,7 +6814,7 @@ export default function Sidebar() {
                       renderedChatEntries.map((entry) => renderChatItem(entry.row))
                     ) : (
                       <div className="px-2 py-2 text-[length:var(--app-font-size-ui,12px)] text-muted-foreground/48">
-                        No chats yet
+                        {t("sidebar.emptyStates.noChats")}
                       </div>
                     )}
                     {canShowMoreChatThreads || canShowLessChatThreads ? (
@@ -7020,7 +7042,7 @@ export default function Sidebar() {
                 }
               >
                 <ProjectContextMenuIcon icon={PinIcon} />
-                <span>{pinActionLabel("project", projectContextMenuIsPinned)}</span>
+                <span>{pinActionLabel("project", projectContextMenuIsPinned, t)}</span>
               </MenuItem>
               {projectContextMenuHasArchivableThreads || projectContextMenuHasAnyThreads ? (
                 <MenuSeparator />

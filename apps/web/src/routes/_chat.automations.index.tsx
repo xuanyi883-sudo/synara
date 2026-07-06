@@ -1,6 +1,7 @@
 import { type AutomationDefinition, type AutomationRun } from "@t3tools/contracts";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import { getProviderStartOptions, useAppSettings } from "~/appSettings";
 import {
@@ -148,6 +149,7 @@ function rowMeta(definition: AutomationDefinition, latestRun: AutomationRun | nu
 }
 
 function AutomationsRouteView() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { settings } = useAppSettings();
   const desktopTopBarTrafficLightGutterClassName = useDesktopTopBarTrafficLightGutterClassName();
@@ -415,17 +417,19 @@ function AutomationsRouteView() {
         <main className="min-h-0 flex-1 overflow-y-auto">
           <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 pb-12 pt-8">
             <h1 className="px-2 font-heading text-2xl font-semibold tracking-tight text-foreground">
-              Automations
+              {t("environment.automations.label")}
             </h1>
             {isLoading ? (
               <div className="py-16 text-center text-sm text-muted-foreground">
-                Loading automations...
+                {t("environment.automations.loading")}
               </div>
             ) : data.definitions.length === 0 ? (
               <div className="flex flex-col items-center gap-1 py-16 text-center">
-                <p className="text-sm font-medium text-foreground">No automations yet</p>
+                <p className="text-sm font-medium text-foreground">
+                  {t("environment.automations.empty.title")}
+                </p>
                 <p className="max-w-xs text-xs text-muted-foreground">
-                  Schedule a prompt to run on its own, or wake an existing thread on a loop.
+                  {t("environment.automations.empty.description")}
                 </p>
               </div>
             ) : (

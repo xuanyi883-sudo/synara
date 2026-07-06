@@ -16,6 +16,7 @@ import {
 } from "@t3tools/contracts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useAppSettings } from "~/appSettings";
 import {
@@ -764,6 +765,7 @@ export function AutomationDialog({
   readonly onSubmit: () => void;
   readonly busy: boolean;
 }) {
+  const { t } = useTranslation();
   const setField = <K extends keyof AutomationFormState>(key: K, value: AutomationFormState[K]) =>
     onFormChange({ ...form, [key]: value });
   const projectThreads = threads.filter((thread) => thread.projectId === form.projectId);
@@ -827,7 +829,9 @@ export function AutomationDialog({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogPopup surface="solid" showCloseButton={false} className="max-w-3xl">
         <DialogTitle className="sr-only">
-          {editing ? "Edit automation" : "New automation"}
+          {editing
+            ? t("environment.automations.editAutomation")
+            : t("environment.automations.newAutomation")}
         </DialogTitle>
 
         <div className="flex items-start gap-3 px-5 pt-5">

@@ -234,7 +234,7 @@ export const ProjectPicker = memo(function ProjectPicker({
       ) : null}
     </span>
   ) : (
-        t("chat.projectPicker.workInProject")
+    t("chat.projectPicker.workInProject")
   );
 
   const handleOpenChange = useCallback((nextOpen: boolean) => {
@@ -282,7 +282,9 @@ export const ProjectPicker = memo(function ProjectPicker({
         );
       })
       .catch((error) => {
-        setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToLoadFolders"));
+        setErrorMessage(
+          error instanceof Error ? error.message : t("chat.projectPicker.unableToLoadFolders"),
+        );
       })
       .finally(() => {
         setIsLoadingDirectories(false);
@@ -304,10 +306,16 @@ export const ProjectPicker = memo(function ProjectPicker({
             setOpen(false);
           })
           .catch((error) => {
-            setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToSelectProject"));
+            setErrorMessage(
+              error instanceof Error
+                ? error.message
+                : t("chat.projectPicker.unableToSelectProject"),
+            );
           });
       } catch (error) {
-        setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToSelectProject"));
+        setErrorMessage(
+          error instanceof Error ? error.message : t("chat.projectPicker.unableToSelectProject"),
+        );
       }
     },
     [isProjectSelectionMode, onSelectProject, onSelectWorkspaceRoot],
@@ -338,7 +346,9 @@ export const ProjectPicker = memo(function ProjectPicker({
       setOpen(false);
     } catch (error) {
       setIsPicking(false);
-      setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToOpenFolderPicker"));
+      setErrorMessage(
+        error instanceof Error ? error.message : t("chat.projectPicker.unableToOpenFolderPicker"),
+      );
     }
   }, [isPicking, onCreateProjectFromPath, onSelectWorkspaceRoot]);
 
@@ -349,15 +359,21 @@ export const ProjectPicker = memo(function ProjectPicker({
           setOpen(false);
         })
         .catch((error) => {
-          setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToUpdateProject"));
+          setErrorMessage(
+            error instanceof Error ? error.message : t("chat.projectPicker.unableToUpdateProject"),
+          );
         });
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : t("chat.projectPicker.unableToUpdateProject"));
+      setErrorMessage(
+        error instanceof Error ? error.message : t("chat.projectPicker.unableToUpdateProject"),
+      );
     }
   }, [onResetToHome]);
 
   const shouldShowResetToHome = showResetToHome || isProjectSelectionMode;
-  const addProjectLabel = isProjectSelectionMode ? t("chat.projectPicker.newProject") : t("chat.projectPicker.addNewProject");
+  const addProjectLabel = isProjectSelectionMode
+    ? t("chat.projectPicker.newProject")
+    : t("chat.projectPicker.addNewProject");
   const loadingAddProjectLabel = isProjectSelectionMode
     ? t("chat.projectPicker.addingProject")
     : t("chat.projectPicker.openingFolderPicker");

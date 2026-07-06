@@ -838,6 +838,8 @@ function buildQueuedComposerPreviewText(input: {
   terminalContexts: ReadonlyArray<TerminalContextDraft>;
   fileComments: ReadonlyArray<FileCommentDraft>;
   pastedTexts: ReadonlyArray<PastedTextDraft>;
+  queuedFollowUpLabel: string;
+  pastedTextsLabel: string;
 }): string {
   if (input.trimmedPrompt.length > 0) {
     return input.trimmedPrompt;
@@ -861,21 +863,24 @@ function buildQueuedComposerPreviewText(input: {
   if (firstFileComment) {
     return formatFileCommentLabel(firstFileComment);
   }
-  const pastedTitle = formatPastedTextTitleSeed(input.pastedTexts);
+  const pastedTitle = formatPastedTextTitleSeed(input.pastedTexts, input.pastedTextsLabel);
   if (pastedTitle) {
     return pastedTitle;
   }
-  return "Queued follow-up";
+  return input.queuedFollowUpLabel;
 }
 
-function formatPastedTextTitleSeed(pastedTexts: ReadonlyArray<PastedTextDraft>): string | null {
+function formatPastedTextTitleSeed(
+  pastedTexts: ReadonlyArray<PastedTextDraft>,
+  pastedTextsLabel: string,
+): string | null {
   const firstPastedText = pastedTexts[0];
   if (!firstPastedText) {
     return null;
   }
   return pastedTexts.length === 1
     ? pastedTextTitle(firstPastedText.text)
-    : `${pastedTexts.length} pasted texts`;
+    : `${pastedTexts.length} ${pastedTextsLabel}`;
 }
 
 const COMPOSER_PATH_QUERY_DEBOUNCE_MS = 120;
@@ -2520,9 +2525,16 @@ export default function ChatView({
       sidebarPlanSourceThreadProposedPlans,
     ],
   );
-  const planSidebarLabel = sidebarProposedPlan ? "Plan details" : "Tasks";
-  const planSidebarToggleLabel = planSidebarOpen ? `Hide ${planSidebarLabel}` : planSidebarLabel;
-  const planSidebarToggleTitle = `${planSidebarOpen ? "Hide" : "Show"} ${planSidebarLabel.toLowerCase()} sidebar`;
+  const planSidebarLabel = sidebarProposedPlan
+    ? t("chat.planSidebar.details")
+    : t("chat.planSidebar.tasks");
+  const planSidebarToggleLabel = planSidebarOpen
+    ? t("chat.planSidebar.hideLabel", { label: planSidebarLabel })
+    : planSidebarLabel;
+  const planSidebarToggleTitle = t("chat.planSidebar.toggleTitle", {
+    action: planSidebarOpen ? t("chat.planSidebar.hide") : t("chat.planSidebar.show"),
+    label: planSidebarLabel.toLowerCase(),
+  });
   // Measured height of the whole stack of panels rendered above the composer input
   // (live file changes, active task list, queued follow-ups). The composer overlaps the
   // scrolling transcript, so the transcript reserves matching bottom space to keep its
@@ -2953,7 +2965,7 @@ export default function ChatView({
       .then(() => {
         toastManager.add({
           type: "success",
-          title: "Project instructions added to notepad.",
+          title: t("chat.toast.notepadUpdated"),
         });
       })
       .catch(() => {
@@ -2975,7 +2987,7 @@ export default function ChatView({
         console.error("Failed to remove thread marker", error);
         toastManager.add({
           type: "error",
-          title: "Could not remove marker.",
+          title: t("chat.toast.couldNotRemoveMarker"),
         });
       });
     },
@@ -2994,7 +3006,7 @@ export default function ChatView({
         console.error("Failed to update thread marker", error);
         toastManager.add({
           type: "error",
-          title: "Could not update marker.",
+          title: t("chat.toast.couldNotUpdateMarker"),
         });
       });
     },
@@ -3009,7 +3021,7 @@ export default function ChatView({
         console.error("Failed to rename thread marker", error);
         toastManager.add({
           type: "error",
-          title: "Could not rename marker.",
+          title: t("chat.toast.couldNotRenameMarker"),
         });
       });
     },
@@ -3327,18 +3339,18 @@ export default function ChatView({
           id: "fork-target:worktree",
           type: "fork-target" as const,
           target: "worktree" as const,
-          label: "Fork Into New Worktree",
-          description: "Continue in a new worktree",
+          label: t("chat.forkTarget.forkIntoNewWorktree"),
+          description: t("chat.forkTarget.continueInNewWorktree"),
         },
         {
           id: "fork-target:local",
           type: "fork-target" as const,
           target: "local" as const,
-          label: "Fork Into Local",
+          label: t("chat.forkTarget.forkIntoLocal"),
           description:
             activeThread?.worktreePath || activeThread?.envMode === "worktree"
-              ? "Continue in this local worktree"
-              : "Continue in the current local thread",
+              ? t("chat.forkTarget.continueInLocalWorktree")
+              : t("chat.forkTarget.continueInLocalThread"),
         },
       ];
     }
@@ -3348,15 +3360,15 @@ export default function ChatView({
           id: "review-target:changes",
           type: "review-target" as const,
           target: "changes" as const,
-          label: "Review Uncommitted Changes",
-          description: "Review local uncommitted changes",
+          label: t("chat.forkTarget.reviewUncommittedChanges"),
+          description: t("chat.forkTarget.reviewLocalUncommittedChanges"),
         },
         {
           id: "review-target:base-branch",
           type: "review-target" as const,
           target: "base-branch" as const,
-          label: "Review Against Base Branch",
-          description: "Review the current branch diff against its base",
+          label: t("chat.forkTarget.reviewAgainstBaseBranch"),
+          description: t("chat.forkTarget.reviewTheCurrentBranchDiff"),
         },
       ];
     }
@@ -3367,6 +3379,7 @@ export default function ChatView({
     activeThread?.worktreePath,
     composerCommandPicker,
     normalComposerMenuItems,
+    t,
   ]);
   const composerMenuOpen = Boolean(composerTrigger || composerCommandPicker);
   const activeComposerMenuItem = useMemo(
@@ -3485,7 +3498,9 @@ export default function ChatView({
         : [],
     [activeThread, providerStatuses],
   );
-  const handoffActionLabel = activeThread ? "Hand off thread" : "Create handoff thread";
+  const handoffActionLabel = activeThread
+    ? t("chat.handoff.actionLabelActive")
+    : t("chat.handoff.actionLabelCreate");
   const activeProviderStatus = useMemo(
     () => findProviderStatus(providerStatuses, selectedProvider),
     [selectedProvider, providerStatuses],
@@ -3658,9 +3673,9 @@ export default function ChatView({
       void api?.browser.open({ threadId, initialUrl: url }).catch((error) => {
         toastManager.add({
           type: "error",
-          title: "Could not open repository",
+          title: t("chat.toast.couldNotOpenRepository"),
           description:
-            error instanceof Error ? error.message : "The in-app browser could not open GitHub.",
+            error instanceof Error ? error.message : t("chat.toast.inAppBrowserCouldNotOpenGitHub"),
         });
       });
       if (onOpenBrowserUrl) {
@@ -4594,13 +4609,13 @@ export default function ChatView({
         });
         toastManager.add({
           type: "success",
-          title: `Deleted action "${deletedName ?? "Unknown"}"`,
+          title: t("chat.toast.deletedAction", { name: deletedName ?? "Unknown" }),
         });
       } catch (error) {
         toastManager.add({
           type: "error",
-          title: "Could not delete action",
-          description: error instanceof Error ? error.message : "An unexpected error occurred.",
+          title: t("chat.toast.couldNotDeleteAction"),
+          description: error instanceof Error ? error.message : t("chat.toast.noDescriptionError"),
         });
       }
     },
@@ -4628,9 +4643,9 @@ export default function ChatView({
             .catch((error) => {
               toastManager.add({
                 type: "error",
-                title: "Could not update access mode",
+                title: t("chat.toast.couldNotUpdateAccessMode"),
                 description:
-                  error instanceof Error ? error.message : "An unexpected error occurred.",
+                  error instanceof Error ? error.message : t("chat.toast.noDescriptionError"),
               });
             });
         }
@@ -4669,9 +4684,9 @@ export default function ChatView({
             .catch((error) => {
               toastManager.add({
                 type: "error",
-                title: "Could not update plan mode",
+                title: t("chat.toast.couldNotUpdatePlanMode"),
                 description:
-                  error instanceof Error ? error.message : "An unexpected error occurred.",
+                  error instanceof Error ? error.message : t("chat.toast.noDescriptionError"),
               });
             });
         }
@@ -4977,7 +4992,7 @@ export default function ChatView({
       if (!message) {
         toastManager.add({
           type: "warning",
-          title: "Could not find the selected message.",
+          title: t("chat.toast.couldNotFindMessage"),
         });
         return;
       }
@@ -4988,8 +5003,8 @@ export default function ChatView({
       if (!range) {
         toastManager.add({
           type: "warning",
-          title: "Select a unique phrase to mark it.",
-          description: "Try including a few more words so Synara can find the exact place.",
+          title: t("chat.toast.selectUniquePhrase"),
+          description: t("chat.toast.selectUniquePhraseHint"),
         });
         return;
       }
@@ -5008,7 +5023,7 @@ export default function ChatView({
             console.error("Failed to remove thread marker", error);
             toastManager.add({
               type: "error",
-              title: "Could not remove marker.",
+              title: t("chat.toast.couldNotRemoveMarker"),
             });
           });
         }
@@ -5027,7 +5042,7 @@ export default function ChatView({
         console.error("Failed to create thread marker", error);
         toastManager.add({
           type: "error",
-          title: "Could not create marker.",
+          title: t("chat.toast.couldNotCreateMarker"),
         });
       });
     },
@@ -5947,21 +5962,21 @@ export default function ChatView({
     if (voiceProviderStatus?.authStatus === "unauthenticated") {
       toastManager.add({
         type: "error",
-        title: "Sign in to ChatGPT in Codex before using voice notes.",
+        title: t("chat.voice.signInDescription"),
       });
       return;
     }
     if (!canStartVoiceNotes) {
       toastManager.add({
         type: "error",
-        title: "Voice notes require a ChatGPT-authenticated Codex session.",
+        title: t("chat.voice.voiceNotesRequireSession"),
       });
       return;
     }
     if (pendingUserInputs.length > 0) {
       toastManager.add({
         type: "error",
-        title: "Answer plan questions before recording a voice note.",
+        title: t("chat.voice.answerPlanFirst"),
       });
       return;
     }
@@ -5972,7 +5987,7 @@ export default function ChatView({
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "Could not start recording",
+        title: t("chat.voice.couldNotStartRecording"),
         description: describeVoiceRecordingStartError(error),
       });
     }
@@ -6007,7 +6022,7 @@ export default function ChatView({
     if (!api) {
       toastManager.add({
         type: "error",
-        title: "Voice transcription is unavailable right now.",
+        title: t("chat.voice.unavailableRightNow"),
       });
       void cancelVoiceRecording();
       return;
@@ -6031,7 +6046,7 @@ export default function ChatView({
       if (!payload) {
         toastManager.add({
           type: "warning",
-          title: "No audio was captured.",
+          title: t("chat.voice.noAudioCaptured"),
         });
         return;
       }
@@ -6052,21 +6067,19 @@ export default function ChatView({
       const description =
         error instanceof Error
           ? sanitizeVoiceErrorMessage(error.message)
-          : "The voice note could not be transcribed.";
+          : t("chat.voice.voiceNoteCouldNotBeTranscribed");
       const authExpired = isVoiceAuthExpiredMessage(description);
       if (authExpired) {
         void refreshProviderStatuses();
       }
       toastManager.add({
         type: "error",
-        title: authExpired ? "Sign in to ChatGPT again" : "Couldn't transcribe voice note",
-        description: authExpired
-          ? "Voice transcription uses your ChatGPT session in Codex. That session was rejected, so sign in again there and retry."
-          : description,
+        title: authExpired ? t("chat.voice.signInAgain") : t("chat.voice.couldNotTranscribeVoice"),
+        description: authExpired ? t("chat.voice.signInExpiredDescription") : description,
         ...(authExpired
           ? {
               actionProps: {
-                children: "Refresh status",
+                children: t("chat.voice.refreshStatus"),
                 onClick: () => {
                   void refreshProviderStatuses();
                 },
@@ -6139,7 +6152,7 @@ export default function ChatView({
       if (pendingUserInputs.length > 0) {
         toastManager.add({
           type: "error",
-          title: "Attach images after answering plan questions.",
+          title: t("chat.toast.attachImagesAfterPlan"),
         });
         return;
       }
@@ -6183,7 +6196,7 @@ export default function ChatView({
       if (pendingUserInputs.length > 0) {
         toastManager.add({
           type: "error",
-          title: "Attach files after answering plan questions.",
+          title: t("chat.toast.attachFilesAfterPlan"),
         });
         return;
       }
@@ -6283,11 +6296,8 @@ export default function ChatView({
       } catch (error) {
         toastManager.add({
           type: "error",
-          title: "Could not create handoff thread",
-          description:
-            error instanceof Error
-              ? error.message
-              : "An error occurred while creating the handoff thread.",
+          title: t("chat.handoff.couldNotCreate"),
+          description: error instanceof Error ? error.message : t("chat.handoff.creationError"),
         });
       }
     },
@@ -6448,9 +6458,8 @@ export default function ChatView({
             } catch {
               toastManager.add({
                 type: "warning",
-                title: "Thread note not added",
-                description:
-                  "The automation was created, but Synara could not add the activity note.",
+                title: t("chat.toast.threadNoteNotAdded"),
+                description: t("chat.toast.threadNoteNotAddedDescription"),
               });
             }
           })();
@@ -6460,16 +6469,15 @@ export default function ChatView({
         resetAutomationDraftState();
         toastManager.add({
           type: "success",
-          title: "Automation created",
+          title: t("chat.toast.automationCreated"),
           description: `${definition.name} - ${formatCadence(definition.schedule)}`,
         });
         return true;
       } catch (error) {
         toastManager.add({
           type: "error",
-          title: "Could not create automation",
-          description:
-            error instanceof Error ? error.message : "Synara could not save the automation.",
+          title: t("chat.toast.couldNotCreateAutomation"),
+          description: error instanceof Error ? error.message : t("chat.toast.planAutomationError"),
         });
         return false;
       } finally {
@@ -6500,8 +6508,8 @@ export default function ChatView({
       if (!api || !activeProject || !activeThread) {
         toastManager.add({
           type: "warning",
-          title: "Chat required",
-          description: "Open a chat before creating a chat-bound automation.",
+          title: t("chat.toast.chatRequired"),
+          description: t("chat.toast.chatRequiredDescription"),
         });
         return null;
       }
@@ -6536,8 +6544,8 @@ export default function ChatView({
         if (result === "unavailable") {
           toastManager.add({
             type: "error",
-            title: "Could not create chat",
-            description: "Synara could not promote this draft before saving the automation.",
+            title: t("chat.toast.couldNotCreateChat"),
+            description: t("chat.toast.draftPromotionFailed"),
           });
           return null;
         }
@@ -6556,11 +6564,9 @@ export default function ChatView({
       } catch (error) {
         toastManager.add({
           type: "error",
-          title: "Could not create chat",
+          title: t("chat.toast.couldNotCreateChat"),
           description:
-            error instanceof Error
-              ? error.message
-              : "Synara could not promote this draft before saving the automation.",
+            error instanceof Error ? error.message : t("chat.toast.draftPromotionFailed"),
         });
         return null;
       }
@@ -6668,7 +6674,7 @@ export default function ChatView({
         resetAutomationDraftState();
         toastManager.add({
           type: "success",
-          title: "Automation updated",
+          title: t("chat.toast.automationUpdated"),
           description: `${updated.name} - ${formatCadence(updated.schedule)}`,
         });
         return true;
@@ -7042,10 +7048,8 @@ export default function ChatView({
           if (!hasPromptOnlySendableContent || hasLiveTurn) {
             toastManager.add({
               type: "warning",
-              title: "Automation needs a bit more detail",
-              description:
-                automationRequest.reason ??
-                'Add what it should do and how often, e.g. "every weekday at 9am, summarize my PRs".',
+              title: t("chat.toast.automationNeedsDetail"),
+              description: automationRequest.reason ?? t("chat.toast.automationNeedsDetailExample"),
             });
             return true;
           }
@@ -7192,15 +7196,15 @@ export default function ChatView({
     } else if (browserPromptAttachment.requested) {
       const description =
         browserPromptAttachment.reason === "no-open-browser"
-          ? "Open the in-app browser first, then try again."
+          ? t("browser.panel.openInAppBrowserFirst")
           : browserPromptAttachment.reason === "no-active-tab"
-            ? "The in-app browser has no active tab to capture yet."
+            ? t("browser.panel.noActiveTab")
             : browserPromptAttachment.reason === "attachment-too-large"
-              ? `The browser screenshot exceeded the ${IMAGE_SIZE_LIMIT_LABEL} attachment limit.`
-              : "The current browser context could not be attached.";
+              ? t("browser.panel.screenshotExceededLimit", { limit: IMAGE_SIZE_LIMIT_LABEL })
+              : t("browser.panel.contextCouldNotBeAttached");
       toastManager.add({
         type: "warning",
-        title: "Couldn’t attach the in-app browser context",
+        title: t("chat.toast.browserContextAttachFailed"),
         description,
       });
     }
@@ -7232,6 +7236,8 @@ export default function ChatView({
           terminalContexts: sendableComposerTerminalContexts,
           fileComments: composerFileCommentsForSend,
           pastedTexts: sendableComposerPastedTexts,
+          queuedFollowUpLabel: t("chat.composer.queuedFollowUp"),
+          pastedTextsLabel: t("chat.composer.pastedTexts"),
         }),
         prompt: promptForSend,
         images: queuedImagesForPersistence,
@@ -7277,7 +7283,8 @@ export default function ChatView({
         titleSeed = formatFileCommentTitleSeed(composerFileCommentsForSend.length);
       } else if (sendableComposerPastedTexts.length > 0) {
         titleSeed =
-          formatPastedTextTitleSeed(sendableComposerPastedTexts) ?? GENERIC_CHAT_THREAD_TITLE;
+          formatPastedTextTitleSeed(sendableComposerPastedTexts, t("chat.composer.pastedTexts")) ??
+          GENERIC_CHAT_THREAD_TITLE;
       } else {
         titleSeed = GENERIC_CHAT_THREAD_TITLE;
       }
@@ -8493,9 +8500,9 @@ export default function ChatView({
         }
         toastManager.add({
           type: "error",
-          title: "Could not start implementation thread",
+          title: t("chat.toast.couldNotStartImplementationThread"),
           description:
-            err instanceof Error ? err.message : "An error occurred while creating the new thread.",
+            err instanceof Error ? err.message : t("chat.toast.implementationThreadError"),
         });
       })
       .then(finish, finish);
@@ -8614,14 +8621,17 @@ export default function ChatView({
     model: selectedModelForPickerWithCustomFallback,
     modelOptionsByProvider,
   });
-  const composerFooterTraitsSummary = resolveTraitsTriggerSummary({
-    provider: selectedProvider,
-    model: selectedModelForPickerWithCustomFallback,
-    prompt,
-    modelOptions: selectedProviderModelOptions,
-    ...(selectedRuntimeModel ? { runtimeModel: selectedRuntimeModel } : {}),
-    runtimeAgents: dynamicAgents,
-  });
+  const composerFooterTraitsSummary = resolveTraitsTriggerSummary(
+    {
+      provider: selectedProvider,
+      model: selectedModelForPickerWithCustomFallback,
+      prompt,
+      modelOptions: selectedProviderModelOptions,
+      ...(selectedRuntimeModel ? { runtimeModel: selectedRuntimeModel } : {}),
+      runtimeAgents: dynamicAgents,
+    },
+    t,
+  );
   const composerFooterPlanInputsKey = [
     composerFooterModelLabel,
     composerFooterTraitsSummary.summaryText,
@@ -9247,8 +9257,8 @@ export default function ChatView({
       if (!activeProject) {
         toastManager.add({
           type: "warning",
-          title: "Clear is unavailable",
-          description: "Open a project before starting a fresh thread.",
+          title: t("chat.toast.clearUnavailable"),
+          description: t("chat.toast.clearUnavailableDescription"),
         });
         return;
       }
@@ -9880,8 +9890,8 @@ export default function ChatView({
     }).catch((error) => {
       toastManager.add({
         type: "error",
-        title: "Failed to rename thread",
-        description: error instanceof Error ? error.message : "An error occurred.",
+        title: t("chat.toast.failedToRenameThread"),
+        description: error instanceof Error ? error.message : t("chat.toast.noDescriptionErrorAlt"),
       });
       throw error;
     });
@@ -9889,7 +9899,7 @@ export default function ChatView({
     if (outcome === "empty") {
       toastManager.add({
         type: "warning",
-        title: "Thread title cannot be empty",
+        title: t("chat.toast.threadTitleEmpty"),
       });
       return;
     }
@@ -10250,7 +10260,7 @@ export default function ChatView({
                       {isLocalFolderBrowserOpen ? (
                         <ComposerLocalDirectoryMenu
                           mentionQuery={mentionTriggerQuery}
-                          rootLabel={localFolderBrowseRootPath ?? "Local folders unavailable"}
+                          rootLabel={localFolderBrowseRootPath ?? t("chat.localFoldersUnavailable")}
                           homeDir={serverConfigQuery.data?.homeDir ?? null}
                           onSelectEntry={(absolutePath) =>
                             handleSelectLocalDirectoryMention(absolutePath)
@@ -10468,10 +10478,10 @@ export default function ChatView({
                           }
                         >
                           {activePendingIsResponding
-                            ? "Submitting..."
+                            ? t("chat.submitting")
                             : activePendingProgress.isLastQuestion
-                              ? "Submit answers"
-                              : "Next question"}
+                              ? t("chat.submitAnswers")
+                              : t("chat.nextQuestion")}
                         </Button>
                       ) : phase === "running" ? (
                         <Button
@@ -10702,14 +10712,14 @@ export default function ChatView({
             surfaceMode === "single" && onSplitSurface
               ? {
                   kind: "split",
-                  label: "Split chat",
+                  label: t("chat.chatLayout.splitChat"),
                   shortcutLabel: chatSplitShortcutLabel,
                   onClick: onSplitSurface,
                 }
               : surfaceMode === "split" && isFocusedPane && onMaximizeSurface
                 ? {
                     kind: "maximize",
-                    label: "Expand this chat",
+                    label: t("chat.chatLayout.expandThisChat"),
                     shortcutLabel: null,
                     onClick: onMaximizeSurface,
                   }
@@ -10733,7 +10743,7 @@ export default function ChatView({
           changeThreadAction={
             surfaceMode === "split" && isFocusedPane && onChangeThreadInSplitPane
               ? {
-                  label: "Change thread",
+                  label: t("chat.chatLayout.changeThread"),
                   onClick: onChangeThreadInSplitPane,
                 }
               : null

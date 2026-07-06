@@ -37,6 +37,7 @@ export function GeneratedMarkdownImage(props: GeneratedMarkdownImageProps) {
     downloadUrl,
     downloadName,
     errorTitle: t("chat.generatedImage.couldNotDownload"),
+    t,
   });
 
   const expandImage = useCallback(

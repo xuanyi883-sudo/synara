@@ -5,6 +5,7 @@
 // Layer: web profile feature (all changes persist to localStorage via the parent hooks).
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog, DialogClose, DialogPopup, DialogTitle } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
 import {
@@ -60,6 +61,7 @@ export function EditProfileDialog({
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   // Re-seed drafts from the live values whenever the dialog (re)opens.
   useEffect(() => {
@@ -102,7 +104,7 @@ export function EditProfileDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPopup surface="solid" showCloseButton={false} className="sm:max-w-[500px]">
-        <DialogTitle className="px-4 pt-4 text-lg">Edit profile</DialogTitle>
+        <DialogTitle className="px-4 pt-4 text-lg">{t("profile.edit.title")}</DialogTitle>
 
         <div className="flex flex-col gap-4 px-4 pt-3">
           {/* Avatar */}
@@ -118,7 +120,7 @@ export function EditProfileDialog({
               <button
                 type="button"
                 onClick={() => setShowEditor((value) => !value)}
-                aria-label="Edit avatar"
+                aria-label={t("profile.edit.editAvatar")}
                 className={cn(
                   "absolute bottom-0 end-0 flex size-7 items-center justify-center rounded-full",
                   "bg-black/45 text-white backdrop-blur-sm transition-colors hover:bg-black/60",
@@ -151,7 +153,11 @@ export function EditProfileDialog({
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <CentralIcon name="add-image" className="size-3.5" />
-                    {processing ? "Processing…" : draftImage ? "Replace photo" : "Upload photo"}
+                    {processing
+                      ? t("profile.edit.processing")
+                      : draftImage
+                        ? t("profile.edit.replacePhoto")
+                        : t("profile.edit.uploadPhoto")}
                   </Button>
                   {draftImage && (
                     <Button
@@ -165,7 +171,7 @@ export function EditProfileDialog({
                       }}
                     >
                       <CentralIcon name="trash-can-simple" className="size-3.5" />
-                      Remove
+                      {t("profile.edit.remove")}
                     </Button>
                   )}
                 </div>
@@ -176,7 +182,7 @@ export function EditProfileDialog({
                       key={color}
                       type="button"
                       onClick={() => setDraftColor(color)}
-                      aria-label={`Use ${color}`}
+                      aria-label={t("profile.edit.useColor", { color })}
                       className={cn(
                         "size-5 rounded-full transition-transform hover:scale-110",
                         !draftImage &&
@@ -190,7 +196,7 @@ export function EditProfileDialog({
 
                 {draftImage && (
                   <p className="text-center text-xs text-muted-foreground">
-                    Colors apply when no photo is set.
+                    {t("profile.edit.colorsApplyInfo")}
                   </p>
                 )}
               </div>
@@ -201,16 +207,16 @@ export function EditProfileDialog({
 
           {/* Fields */}
           <div className="divide-y divide-border/60 overflow-hidden rounded-xl border border-border/60">
-            <Field label="Display name">
+            <Field label={t("profile.edit.displayName")}>
               <InputGroup className={fieldControlClassName}>
                 <InputGroupInput
                   value={draftName}
                   onChange={(event) => setDraftName(event.target.value)}
-                  placeholder="Your name"
+                  placeholder={t("profile.edit.yourName")}
                 />
               </InputGroup>
             </Field>
-            <Field label="Username">
+            <Field label={t("profile.edit.username")}>
               <InputGroup className={fieldControlClassName}>
                 <InputGroupAddon>
                   <InputGroupText>@</InputGroupText>
@@ -231,7 +237,7 @@ export function EditProfileDialog({
           <DialogClose
             render={<Button variant="ghost" size="default" className={dialogButtonClassName} />}
           >
-            Cancel
+            {t("profile.edit.cancel")}
           </DialogClose>
           <Button
             variant="default"
@@ -240,7 +246,7 @@ export function EditProfileDialog({
             onClick={handleSave}
             disabled={processing}
           >
-            Save
+            {t("profile.edit.save")}
           </Button>
         </div>
       </DialogPopup>
