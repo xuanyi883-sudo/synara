@@ -26,7 +26,12 @@ import { cn } from "~/lib/utils";
 import { formatElapsed } from "../../session-logic";
 import { RAISED_SURFACE_CHROME_CLASS_NAME } from "../chat/composerPickerStyles";
 import { KanbanStatusIcon } from "./KanbanStatusIcon";
-import { kanbanThreadCardId, type KanbanCard } from "./kanban.logic";
+import {
+  kanbanThreadCardId,
+  KANBAN_ATTACHED_REFERENCES_SENTINEL,
+  KANBAN_DRAFT_TITLE_SENTINEL,
+  type KanbanCard,
+} from "./kanban.logic";
 
 export interface KanbanCardViewProps {
   card: KanbanCard;
@@ -64,12 +69,13 @@ function KanbanCardColumnLabel({ card }: { card: KanbanCard }) {
 }
 
 // Pills that merely restate the card's column add nothing, so we drop them and
-// let the column label speak: "Working"/"Connecting" duplicate the "In Progress"
-// column, and "Completed" duplicates "Done". Distinct, actionable states
-// (Pending Approval, Awaiting Input, Plan Ready) still surface as pills.
-const REDUNDANT_COLUMN_PILL_LABELS = new Set(["Working", "Connecting", "Completed"]);
+// let the column label speak: "working"/"connecting" duplicate the "In Progress"
+// column, and "completed" duplicates "Done". Distinct, actionable states
+// (pendingApproval, awaitingInput, planReady) still surface as pills.
+const REDUNDANT_COLUMN_PILL_STATUS_IDS = new Set(["working", "connecting", "completed"]);
 
 function KanbanCardStatusPill({ card }: { card: KanbanCard }) {
+  const { t } = useTranslation();
   const pill = card.thread
     ? resolveThreadStatusPill({
         thread: card.thread,
@@ -77,7 +83,7 @@ function KanbanCardStatusPill({ card }: { card: KanbanCard }) {
         hasPendingUserInput: card.thread.hasPendingUserInput,
       })
     : null;
-  if (!pill || REDUNDANT_COLUMN_PILL_LABELS.has(pill.label)) {
+  if (!pill || REDUNDANT_COLUMN_PILL_STATUS_IDS.has(pill.statusId)) {
     return null;
   }
   return (
@@ -89,7 +95,7 @@ function KanbanCardStatusPill({ card }: { card: KanbanCard }) {
           pill.pulse ? "animate-pulse" : "",
         )}
       />
-      <span className="truncate">{pill.label}</span>
+      <span className="truncate">{t(`sidebar.status.${pill.statusId}`)}</span>
     </span>
   );
 }
@@ -128,6 +134,15 @@ function KanbanCardViewComponent({
     card.draftPrompt.length > 0 &&
     card.cardId === kanbanThreadCardId(card.threadId);
 
+  // Sentinel titles are identity markers, not display text — translate them here
+  // at the render boundary so the kanban logic layer stays free of i18n deps.
+  const displayTitle =
+    card.title === KANBAN_DRAFT_TITLE_SENTINEL
+      ? t("kanban.fallbackDraftTitle")
+      : card.title === KANBAN_ATTACHED_REFERENCES_SENTINEL
+        ? t("kanban.attachedReferences")
+        : card.title;
+
   const isForked = Boolean(card.thread?.forkSourceThreadId && !card.thread.sidechatSourceThreadId);
   const worktreeBadgeLabel = resolveThreadEnvironmentPresentation({
     envMode: card.envMode,
@@ -159,7 +174,7 @@ function KanbanCardViewComponent({
     >
       <span className="flex min-w-0 items-start gap-1.5">
         <span className="line-clamp-2 min-w-0 flex-1 text-[13px] leading-snug font-medium text-foreground/90">
-          {card.title}
+          {displayTitle}
         </span>
         {card.thread?.isPinned ? (
           <span title={t("kanban.card.pinned")} className="flex shrink-0 items-center pt-0.5">

@@ -538,7 +538,7 @@ function WorktreeBadgeGlyph({ className }: { className?: string }) {
 // colored status dot. Thread rows and project headers use the same glyph so a
 // collapsed project still advertises active child chats.
 function SidebarStatusTrailingGlyph({ status }: { status: ThreadStatusPill }) {
-  if (status.label === "Completed") {
+  if (status.statusId === "completed") {
     // Match the worktree/other trailing chips' optical size (15px) so the green
     // check reads as part of the same right-side icon cluster.
     return (
@@ -631,6 +631,8 @@ function resolveThreadRowMetaChips(input: {
   handoffShownInAvatar?: boolean;
   /** Heartbeat automations targeting this thread; surfaced as an at-a-glance clock chip. */
   threadAutomations?: readonly AutomationDefinition[] | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t: (key: string, options?: any) => string;
 }): ThreadMetaChip[] {
   const chips: ThreadMetaChip[] = [];
   const isSidechatThread = Boolean(input.thread.sidechatSourceThreadId);
@@ -642,9 +644,11 @@ function resolveThreadRowMetaChips(input: {
     const tooltip =
       threadAutomations.length === 1
         ? `${firstAutomation.name} · ${
-            firstAutomation.enabled ? formatCadence(firstAutomation.schedule) : "Paused"
+            firstAutomation.enabled
+              ? formatCadence(firstAutomation.schedule, input.t)
+              : input.t("automations.list.paused")
           }`
-        : `${threadAutomations.length} automations`;
+        : input.t("sidebar.thread.automationsCount", { count: threadAutomations.length });
     chips.push({
       id: "automation",
       tooltip,
@@ -670,7 +674,7 @@ function resolveThreadRowMetaChips(input: {
   if (input.thread.forkSourceThreadId && !isSidechatThread) {
     chips.push({
       id: "fork",
-      tooltip: "Forked thread",
+      tooltip: input.t("sidebar.status.forkedThread"),
       icon: (
         <SidebarGlyph
           icon={GoRepoForked}
@@ -706,11 +710,12 @@ function ProviderAvatarWithTerminal({
   terminalStatus: TerminalStatusIndicator | null;
   terminalCount: number;
 }) {
+  const { t } = useTranslation();
   const showBadge = terminalCount > 1 || terminalStatus !== null;
   const badgeTooltip =
     terminalCount > 1
-      ? `${terminalCount} ${pluralize(terminalCount, "terminal")} open`
-      : (terminalStatus?.label ?? "Terminal open");
+      ? t("sidebar.terminal.terminalsOpen", { count: terminalCount })
+      : (terminalStatus?.label ?? t("sidebar.status.terminalOpen"));
   const badgeColorClass = terminalStatus?.colorClass ?? "text-muted-foreground/55";
 
   const hasHandoff = Boolean(handoffSourceProvider);
@@ -1599,7 +1604,7 @@ export default function Sidebar() {
       if (!threadStatus?.dismissible) {
         return;
       }
-      if (threadStatus.label === "Completed") {
+      if (threadStatus.statusId === "completed") {
         markThreadVisited(threadId, thread.latestTurn?.completedAt ?? undefined);
         return;
       }
@@ -4884,6 +4889,7 @@ export default function Sidebar() {
         !isGenericChatThreadTitle(thread.title) &&
         Boolean(thread.handoff?.sourceProvider),
       threadAutomations: automationsByThreadId.get(thread.id),
+      t,
     });
     const threadStatus = resolveThreadStatusForSidebar(thread);
     const isSubagentThread = Boolean(thread.parentThreadId);
@@ -4998,7 +5004,7 @@ export default function Sidebar() {
                   thread.title
                 )}
               </span>
-              {!isSubagentThread && threadStatus?.label === "Pending Approval" ? (
+              {!isSubagentThread && threadStatus?.statusId === "pendingApproval" ? (
                 <span
                   aria-label={t("sidebar.status.pendingApproval")}
                   className={cn("shrink-0 text-[10px] font-medium", threadStatus.colorClass)}
@@ -5085,6 +5091,7 @@ export default function Sidebar() {
         !isGenericChatThreadTitle(thread.title) &&
         Boolean(thread.handoff?.sourceProvider),
       threadAutomations: automationsByThreadId.get(thread.id),
+      t,
     });
     const isSubagentThread = Boolean(thread.parentThreadId);
     const leadingPrStatus =
@@ -5268,7 +5275,7 @@ export default function Sidebar() {
                   thread.title
                 )}
               </span>
-              {!isSubagentThread && threadStatus?.label === "Pending Approval" ? (
+              {!isSubagentThread && threadStatus?.statusId === "pendingApproval" ? (
                 <span
                   aria-label={t("sidebar.status.pendingApproval")}
                   className={cn("shrink-0 text-[10px] font-medium", threadStatus.colorClass)}
@@ -5885,7 +5892,7 @@ export default function Sidebar() {
         ? {
             data: { copyText: releaseUrl },
             actionProps: {
-              children: "Download manually",
+              children: t("sidebar.desktopUpdate.downloadManually"),
               onClick: () => {
                 void window.desktopBridge?.openExternal(releaseUrl);
               },
@@ -6385,7 +6392,7 @@ export default function Sidebar() {
                 {isOnWorkspace ? (
                   <SidebarPrimaryAction
                     icon={TerminalIcon}
-                    label="New workspace"
+                    label={t("sidebar.primaryActions.newWorkspace")}
                     onClick={handleCreateWorkspace}
                   />
                 ) : (
@@ -6523,7 +6530,7 @@ export default function Sidebar() {
                                   </SidebarMenuButton>
                                   <SidebarIconButton
                                     icon={Trash2}
-                                    label="Delete workspace"
+                                    label={t("sidebar.workspace.deleteWorkspace")}
                                     glyph="meta"
                                     className="absolute right-1.5 top-1/2 -translate-y-1/2 text-muted-foreground/50 opacity-0 transition-opacity group-hover/menu-item:opacity-100 group-focus-within/menu-item:opacity-100"
                                     onClick={(event) => {
@@ -6798,7 +6805,11 @@ export default function Sidebar() {
                       void handleCreateHomeChat();
                     }}
                     tooltip={
-                      newChatShortcutLabel ? `New chat (${newChatShortcutLabel})` : "New chat"
+                      newChatShortcutLabel
+                        ? t("sidebar.newChatHome.newChatWithShortcut", {
+                            shortcut: newChatShortcutLabel,
+                          })
+                        : t("sidebar.newChatHome.newChat")
                     }
                     tooltipSide="top"
                   />

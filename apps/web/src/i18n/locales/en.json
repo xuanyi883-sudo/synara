@@ -19,6 +19,39 @@
     "default": "Default",
     "unknown": "Unknown",
     "notAvailable": "N/A",
+    "connectingToServer": "Connecting to {{appName}} server...",
+    "tryAgain": "Try again",
+    "reloadApp": "Reload app",
+    "showErrorDetails": "Show error details",
+    "hideErrorDetails": "Hide error details",
+    "unexpectedRouterError": "An unexpected router error occurred.",
+    "noErrorDetails": "No additional error details are available.",
+    "updatingProviders": "Updating providers...",
+    "updatingProvider": "Updating {{provider}}.",
+    "updatingMultipleProviders": "Updating {{count}} providers.",
+    "updateCommandFailed": "The update command did not complete successfully.",
+    "providerStillOutdated": "The provider still appears outdated after updating.",
+    "updateRequestFailed": "The update request failed.",
+    "providerUpdateCouldNotStart": "The provider update request could not start.",
+    "providerUpdatesFailed": "Provider updates failed",
+    "someProviderUpdatesFailed": "Some provider updates failed",
+    "refreshedProviderTools": "New sessions will use the refreshed provider tools.",
+    "reviewUpdates": "Review updates",
+    "updateAll": "Update all",
+    "providerUpdated": "{{provider}} updated",
+    "multipleProvidersUpdated": "{{count}} providers updated",
+    "providerUpdateAvailable": "{{provider}} update available",
+    "multipleProviderUpdatesAvailable": "{{count}} provider updates available",
+    "providerHasNewerVersion": "{{provider}} has a newer version available.",
+    "providerAndMoreHaveNewerVersions": "{{provider}} and {{count}} more provider have newer versions available.",
+    "providerAndMoreHaveNewerVersions_plural": "{{provider}} and {{count}} more providers have newer versions available.",
+    "copyCommandToUpdateManually": "Copy the command below to update manually in a terminal.",
+    "copyCommandsToUpdateManually": "Copy the commands below to update manually in a terminal.",
+    "invalidKeybindingsConfig": "Invalid keybindings configuration",
+    "openKeybindingsJson": "Open keybindings.json",
+    "noAvailableEditors": "No available editors found.",
+    "unableToOpenKeybindings": "Unable to open keybindings file",
+    "unknownErrorOpeningFile": "Unknown error opening file.",
     "weekdays": {
       "short": {
         "sun": "Sun",
@@ -185,6 +218,10 @@
     },
     "archive": {
       "archiveThread": "Archive thread"
+    },
+    "thread": {
+      "automationsCount_one": "{{count}} automation",
+      "automationsCount_other": "{{count}} automations"
     },
     "toast": {
       "pathUnavailable": "Path unavailable",
@@ -825,10 +862,40 @@
     "projectInstructions": "Project instructions",
     "projectInstructionsPlaceholder": "Add project instructions here...",
     "copyToNotepad": "Copy to notepad",
-    "appendToNotepad": "Append to notepad"
+    "appendToNotepad": "Append to notepad",
+    "checkpoint": {
+      "interruptCurrentTurn": "Interrupt the current turn before reverting checkpoints.",
+      "revertConfirmTitle": "Revert this thread to checkpoint {{turnCount}}?",
+      "revertConfirmDescription": "This will discard newer messages and turn diffs in this thread.",
+      "revertConfirmWarning": "This action cannot be undone.",
+      "revertFailed": "Failed to revert thread state."
+    },
+    "pullRequest": {
+      "label": "Pull request",
+      "mergedOnGitHub": "Merged on GitHub",
+      "closedOnGitHub": "Closed on GitHub",
+      "couldNotLoadData": "Couldn't load PR data",
+      "retryLoading": "Retry loading checks and review comments",
+      "loadingChecks": "Loading checks…",
+      "noChecksReported": "No checks reported for this PR.",
+      "loadingComments": "Loading comments…",
+      "commentsUnavailable": "Comments unavailable",
+      "couldNotLoadComments": "Couldn't load review comments: {{error}}",
+      "commentsMayBeHidden": "Review comments may be hidden by the bounded preview. Open the PR on GitHub.",
+      "noUnresolvedComments": "No unresolved review comments.",
+      "moreCommentsAvailable": "More review comments may be available on GitHub.",
+      "askAgentToFix": "Ask the agent to address these review comments",
+      "fix": "Fix"
+    }
   },
   "kanban": {
     "overview": {
+      "nothingOnBoard": "Nothing on board yet",
+      "emptyDescription": "Create a task to get started.",
+      "newTaskIn": "New task in {{projectName}}",
+      "showNMore": "Show {{count}} more"
+    },
+    "card": {
       "terminal": "Terminal",
       "pinned": "Pinned",
       "forkedThread": "Forked thread",
@@ -1000,7 +1067,12 @@
       "discoveryFailed": "Skill discovery failed",
       "discoveryFailedDescription": "Could not scan skills directory. Check that the skills folder exists and is accessible.",
       "noSkillsFound": "No skills found",
-      "noSkillsFoundDescription": "No skills were found in the skills directory or any connected provider."
+      "noSkillsFoundDescription": "No skills were found in the skills directory or any connected provider.",
+      "sharedSkills": "Shared skills",
+      "fromOrigin": "From {{origin}}",
+      "providerStackLabel_one": "Provider copy: {{providers}}",
+      "providerStackLabel_other": "Provider copies: {{providers}}",
+      "enableSkillAria": "Enable the {{skillName}} skill"
     },
     "workspaceSettings": {
       "title": "Workspace settings",
@@ -1042,6 +1114,7 @@
       "repository": "Repository",
       "repositoryDescription": "Show repository tools in the sidebar.",
       "repositoryAria": "Toggle repository section",
+      "environmentPullRequest": "Pull request",
       "editor": "Editor",
       "editorDescription": "Show editor tools in the sidebar.",
       "editorAria": "Toggle editor section",
@@ -1577,7 +1650,14 @@
       "yourName": "Your name",
       "username": "Username",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "couldNotProcessImage": "Could not process that image.",
+      "couldNotReadFile": "Could not read the selected file.",
+      "notReadableImage": "That file isn't a readable image.",
+      "pleaseChooseImage": "Please choose an image file.",
+      "imageHasNoPixels": "That image has no pixels.",
+      "compressionNotSupported": "Image compression isn't supported in this browser.",
+      "imageTooLarge": "That image is too large even after compression."
     }
   },
   "plugin": {
@@ -1798,22 +1878,25 @@
   },
   "_meta": {
     "description": "English translation file",
-    "lastUpdated": "2026-07-06",
-    "totalKeys": 1427
+    "lastUpdated": "2026-07-07",
+    "totalKeys": 1679
   },
   "automations": {
     "templates": {
       "triageCrashes": {
         "label": "Triage new crashes",
-        "name": "Triage crashes"
+        "name": "Triage crashes",
+        "prompt": "Look for new crashes in $sentry and open a fix PR for the most impactful one."
       },
       "updateDependencies": {
         "label": "Update dependencies",
-        "name": "Update dependencies"
+        "name": "Update dependencies",
+        "prompt": "Check for outdated dependencies, bump the safe minor and patch versions, then run the tests."
       },
       "dailyStandup": {
         "label": "Daily standup summary",
-        "name": "Daily summary"
+        "name": "Daily summary",
+        "prompt": "Summarize what changed on the main branch in the last 24 hours as a short standup update."
       }
     },
     "runStatus": {
@@ -1861,7 +1944,16 @@
       "timezonePlaceholder": "Europe/Rome",
       "cronPlaceholder": "0 9 * * *",
       "stopWhenPlaceholder": "PR is ready to merge",
-      "notScheduled": "Not scheduled"
+      "notScheduled": "Not scheduled",
+      "onceWithDate": "Once {{date}}",
+      "dailyWithTime": "Daily {{timeOfDay}}{{timezone}}",
+      "weekdaysWithTime": "Weekdays {{timeOfDay}}{{timezone}}",
+      "weeklyWithDayTime": "Weekly {{day}} {{timeOfDay}}{{timezone}}",
+      "cronWithExpression": "Cron {{expression}} {{timezone}}",
+      "dailyAt": "Daily at {{time}}",
+      "weekdaysAt": "Weekdays at {{time}}",
+      "weeklyAt": "{{day}} at {{time}}",
+      "cronShort": "Cron {{expression}}"
     },
     "interval": {
       "everyNMinutes_one": "Every {{count}} min",
@@ -1872,6 +1964,7 @@
       "everyNHours_other": "Every {{count}} hours",
       "preset15Min": "Every 15 min",
       "preset30Min": "Every 30 min",
+      "preset1Hour": "Every hour",
       "preset2Hours": "Every 2 hours",
       "preset6Hours": "Every 6 hours",
       "preset12Hours": "Every 12 hours",
@@ -1945,6 +2038,9 @@
       "deleteConfirm": "Delete \"{{name}}\"?",
       "heartbeatMeta": "Heartbeat · {{target}}",
       "fromThread": "From {{title}}",
+      "fromThreadSuffix": " · From {{title}}",
+      "done": "Done",
+      "paused": "Paused",
       "label": "Automations",
       "loading": "Loading automations...",
       "emptyTitle": "No automations yet",

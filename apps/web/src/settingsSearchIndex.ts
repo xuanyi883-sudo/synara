@@ -98,6 +98,7 @@ export const SETTINGS_SEARCH_ENTRIES: readonly SettingsSearchEntry[] = [
     id: "general:environment-pull-request",
     section: "general",
     title: "Pull request",
+    titleKey: "settings.general.environmentPullRequest",
     keywords:
       "Show the open pull request CI checks and review comments in the chat Environment panel. pr fix github",
   },

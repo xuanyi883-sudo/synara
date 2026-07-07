@@ -39,7 +39,7 @@ export function EnvironmentAutomationsSection({
       <EnvironmentSectionLabel>{t("environment.automations.label")}</EnvironmentSectionLabel>
       {automations.map(({ definition }) => {
         const cadence = definition.enabled
-          ? formatCadence(definition.schedule)
+          ? formatCadence(definition.schedule, t)
           : t("environment.automations.paused");
         return (
           <EnvironmentRow

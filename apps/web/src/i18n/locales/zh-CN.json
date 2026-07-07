@@ -19,6 +19,38 @@
     "default": "默认",
     "unknown": "未知",
     "notAvailable": "N/A",
+    "connectingToServer": "正在连接到 {{appName}} 服务器...",
+    "tryAgain": "重试",
+    "reloadApp": "重新加载应用",
+    "showErrorDetails": "显示错误详情",
+    "hideErrorDetails": "隐藏错误详情",
+    "unexpectedRouterError": "发生了意外的路由错误。",
+    "noErrorDetails": "没有可用的错误详情。",
+    "updatingProviders": "正在更新提供商...",
+    "updatingProvider": "正在更新 {{provider}}。",
+    "updatingMultipleProviders": "正在更新 {{count}} 个提供商。",
+    "updateCommandFailed": "更新命令未成功完成。",
+    "providerStillOutdated": "更新后提供商似乎仍然过时。",
+    "updateRequestFailed": "更新请求失败。",
+    "providerUpdateCouldNotStart": "提供商更新请求无法启动。",
+    "providerUpdatesFailed": "提供商更新失败",
+    "someProviderUpdatesFailed": "部分提供商更新失败",
+    "refreshedProviderTools": "新会话将使用刷新的提供商工具。",
+    "reviewUpdates": "查看更新",
+    "updateAll": "全部更新",
+    "providerUpdated": "{{provider}} 已更新",
+    "multipleProvidersUpdated": "{{count}} 个提供商已更新",
+    "providerUpdateAvailable": "{{provider}} 有可用更新",
+    "multipleProviderUpdatesAvailable": "{{count}} 个提供商有可用更新",
+    "providerHasNewerVersion": "{{provider}} 有新版本可用。",
+    "providerAndMoreHaveNewerVersions": "{{provider}} 和另外 {{count}} 个提供商有新版本可用。",
+    "copyCommandToUpdateManually": "复制以下命令以在终端中手动更新。",
+    "copyCommandsToUpdateManually": "复制以下命令以在终端中手动更新。",
+    "invalidKeybindingsConfig": "无效的键盘绑定配置",
+    "openKeybindingsJson": "打开 keybindings.json",
+    "noAvailableEditors": "未找到可用的编辑器。",
+    "unableToOpenKeybindings": "无法打开键盘绑定文件",
+    "unknownErrorOpeningFile": "打开文件时发生未知错误。",
     "weekdays": {
       "short": {
         "sun": "日",
@@ -103,6 +135,10 @@
     },
     "archive": {
       "archiveThread": "归档会话"
+    },
+    "thread": {
+      "automationsCount_one": "{{count}} 个自动化",
+      "automationsCount_other": "{{count}} 个自动化"
     },
     "toast": {
       "pathUnavailable": "路径不可用",
@@ -825,7 +861,31 @@
     "projectInstructions": "项目说明",
     "projectInstructionsPlaceholder": "在此处添加项目说明...",
     "copyToNotepad": "复制到记事本",
-    "appendToNotepad": "追加到记事本"
+    "appendToNotepad": "追加到记事本",
+    "checkpoint": {
+      "interruptCurrentTurn": "在还原检查点之前中断当前回合。",
+      "revertConfirmTitle": "将此会话还原到检查点 {{turnCount}}？",
+      "revertConfirmDescription": "这将丢弃此会话中较新的消息和回合差异。",
+      "revertConfirmWarning": "此操作无法撤销。",
+      "revertFailed": "还原会话状态失败。"
+    },
+    "pullRequest": {
+      "label": "拉取请求",
+      "mergedOnGitHub": "已在 GitHub 上合并",
+      "closedOnGitHub": "已在 GitHub 上关闭",
+      "couldNotLoadData": "无法加载 PR 数据",
+      "retryLoading": "重试加载检查和审查评论",
+      "loadingChecks": "加载检查中…",
+      "noChecksReported": "此 PR 未报告任何检查。",
+      "loadingComments": "加载评论中…",
+      "commentsUnavailable": "评论不可用",
+      "couldNotLoadComments": "无法加载审查评论：{{error}}",
+      "commentsMayBeHidden": "审查评论可能因预览限制而隐藏。请在 GitHub 上打开 PR。",
+      "noUnresolvedComments": "没有未解决的审查评论。",
+      "moreCommentsAvailable": "GitHub 上可能有更多审查评论。",
+      "askAgentToFix": "请求代理处理这些审查评论",
+      "fix": "修复"
+    }
   },
   "kanban": {
     "column": {
@@ -1006,7 +1066,12 @@
       "discoveryFailed": "技能发现失败",
       "discoveryFailedDescription": "无法扫描技能目录。请检查技能文件夹是否存在且可访问。",
       "noSkillsFound": "未找到技能",
-      "noSkillsFoundDescription": "在技能目录或任何已连接的提供商中未找到技能。"
+      "noSkillsFoundDescription": "在技能目录或任何已连接的提供商中未找到技能。",
+      "sharedSkills": "共享技能",
+      "fromOrigin": "来自 {{origin}}",
+      "providerStackLabel_one": "提供商副本：{{providers}}",
+      "providerStackLabel_other": "提供商副本：{{providers}}",
+      "enableSkillAria": "启用 {{skillName}} 技能"
     },
     "workspaceSettings": {
       "title": "工作区设置",
@@ -1048,6 +1113,7 @@
       "repository": "仓库",
       "repositoryDescription": "在侧边栏中显示仓库工具。",
       "repositoryAria": "切换仓库板块",
+      "environmentPullRequest": "拉取请求",
       "editor": "编辑器",
       "editorDescription": "在侧边栏中显示编辑器工具。",
       "editorAria": "切换编辑器板块",
@@ -1565,7 +1631,14 @@
       "yourName": "你的名字",
       "username": "用户名",
       "cancel": "取消",
-      "save": "保存"
+      "save": "保存",
+      "couldNotProcessImage": "无法处理该图片。",
+      "couldNotReadFile": "无法读取所选文件。",
+      "notReadableImage": "该文件不是可读的图片。",
+      "pleaseChooseImage": "请选择一个图片文件。",
+      "imageHasNoPixels": "该图片没有像素数据。",
+      "compressionNotSupported": "此浏览器不支持图片压缩。",
+      "imageTooLarge": "即使压缩后，该图片仍然太大。"
     }
   },
   "plugin": {
@@ -1804,22 +1877,25 @@
   },
   "_meta": {
     "description": "中文翻译文件",
-    "lastUpdated": "2026-07-06",
-    "totalKeys": 1427
+    "lastUpdated": "2026-07-07",
+    "totalKeys": 1679
   },
   "automations": {
     "templates": {
       "triageCrashes": {
         "label": "分类新崩溃",
-        "name": "崩溃分类"
+        "name": "崩溃分类",
+        "prompt": "在 $sentry 中查找新崩溃，并为影响最大的那个开启修复 PR。"
       },
       "updateDependencies": {
         "label": "更新依赖",
-        "name": "更新依赖"
+        "name": "更新依赖",
+        "prompt": "检查过时的依赖，升级安全的 minor 和 patch 版本，然后运行测试。"
       },
       "dailyStandup": {
         "label": "每日站会摘要",
-        "name": "每日摘要"
+        "name": "每日摘要",
+        "prompt": "将过去 24 小时内 main 分支的变更总结为简短的站会更新。"
       }
     },
     "runStatus": {
@@ -1867,7 +1943,16 @@
       "timezonePlaceholder": "Europe/Rome",
       "cronPlaceholder": "0 9 * * *",
       "stopWhenPlaceholder": "PR 已准备好合并",
-      "notScheduled": "未计划"
+      "notScheduled": "未计划",
+      "onceWithDate": "一次 {{date}}",
+      "dailyWithTime": "每日 {{timeOfDay}}{{timezone}}",
+      "weekdaysWithTime": "工作日 {{timeOfDay}}{{timezone}}",
+      "weeklyWithDayTime": "每周 {{day}} {{timeOfDay}}{{timezone}}",
+      "cronWithExpression": "Cron {{expression}} {{timezone}}",
+      "dailyAt": "每日 {{time}}",
+      "weekdaysAt": "工作日 {{time}}",
+      "weeklyAt": "{{day}} {{time}}",
+      "cronShort": "Cron {{expression}}"
     },
     "interval": {
       "everyNMinutes_one": "每 {{count}} 分钟",
@@ -1878,6 +1963,7 @@
       "everyNHours_other": "每 {{count}} 小时",
       "preset15Min": "每 15 分钟",
       "preset30Min": "每 30 分钟",
+      "preset1Hour": "每小时",
       "preset2Hours": "每 2 小时",
       "preset6Hours": "每 6 小时",
       "preset12Hours": "每 12 小时",
@@ -1951,6 +2037,9 @@
       "deleteConfirm": "删除 \"{{name}}\"？",
       "heartbeatMeta": "心跳 · {{target}}",
       "fromThread": "来自 {{title}}",
+      "fromThreadSuffix": " · 来自 {{title}}",
+      "done": "已完成",
+      "paused": "已暂停",
       "label": "自动化",
       "loading": "正在加载自动化...",
       "emptyTitle": "暂无自动化",

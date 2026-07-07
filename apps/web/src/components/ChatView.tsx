@@ -6250,14 +6250,14 @@ export default function ChatView({
       if (!api || !activeThread || isRevertingCheckpoint) return;
 
       if (hasLiveTurn || isSendBusy || isConnecting) {
-        setThreadError(activeThread.id, "Interrupt the current turn before reverting checkpoints.");
+        setThreadError(activeThread.id, t("environment.checkpoint.interruptCurrentTurn"));
         return;
       }
       const confirmed = await api.dialogs.confirm(
         [
-          `Revert this thread to checkpoint ${turnCount}?`,
-          "This will discard newer messages and turn diffs in this thread.",
-          "This action cannot be undone.",
+          t("environment.checkpoint.revertConfirmTitle", { turnCount }),
+          t("environment.checkpoint.revertConfirmDescription"),
+          t("environment.checkpoint.revertConfirmWarning"),
         ].join("\n"),
       );
       if (!confirmed) {
@@ -6277,12 +6277,12 @@ export default function ChatView({
       } catch (err) {
         setThreadError(
           activeThread.id,
-          err instanceof Error ? err.message : "Failed to revert thread state.",
+          err instanceof Error ? err.message : t("environment.checkpoint.revertFailed"),
         );
       }
       setIsRevertingCheckpoint(false);
     },
-    [activeThread, hasLiveTurn, isConnecting, isRevertingCheckpoint, isSendBusy, setThreadError],
+    [activeThread, hasLiveTurn, isConnecting, isRevertingCheckpoint, isSendBusy, setThreadError, t],
   );
 
   const onCreateHandoffThread = useCallback(
@@ -6441,13 +6441,13 @@ export default function ChatView({
                   id: EventId.makeUnsafe(randomUUID()),
                   tone: "info",
                   kind: "automation.created",
-                  summary: `Created automation: ${definition.name} - ${formatCadence(definition.schedule)}`,
+                  summary: `Created automation: ${definition.name} - ${formatCadence(definition.schedule, t)}`,
                   payload: {
                     source: "chat-composer",
                     automationId: definition.id,
                     automationName: definition.name,
                     mode: definition.mode,
-                    cadenceLabel: formatCadence(definition.schedule),
+                    cadenceLabel: formatCadence(definition.schedule, t),
                     schedule: automationScheduleActivityPayload(definition.schedule),
                   },
                   turnId: null,
@@ -6470,7 +6470,7 @@ export default function ChatView({
         toastManager.add({
           type: "success",
           title: t("chat.toast.automationCreated"),
-          description: `${definition.name} - ${formatCadence(definition.schedule)}`,
+          description: `${definition.name} - ${formatCadence(definition.schedule, t)}`,
         });
         return true;
       } catch (error) {
@@ -6675,7 +6675,7 @@ export default function ChatView({
         toastManager.add({
           type: "success",
           title: t("chat.toast.automationUpdated"),
-          description: `${updated.name} - ${formatCadence(updated.schedule)}`,
+          description: `${updated.name} - ${formatCadence(updated.schedule, t)}`,
         });
         return true;
       } catch {

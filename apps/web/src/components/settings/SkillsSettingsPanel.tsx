@@ -27,12 +27,18 @@ import {
 } from "./skillsSettingsModel";
 
 function SkillProviderStack({ providers }: { providers: ReadonlyArray<ProviderKind> }) {
+  const { t } = useTranslation();
   if (providers.length === 0) {
     return null;
   }
 
   const label = providers.map(providerDisplayName).join(", ");
-  const stackLabel = `Provider ${providers.length === 1 ? "copy" : "copies"}: ${label}`;
+  const stackLabel = t(
+    providers.length === 1
+      ? "settings.skills.providerStackLabel_one"
+      : "settings.skills.providerStackLabel_other",
+    { providers: label },
+  );
   return (
     <span
       className="inline-flex shrink-0 items-center -space-x-1"
@@ -70,8 +76,8 @@ export function SkillsSettingsPanel() {
     [catalogQuery.data?.skills],
   );
   const skillSections = useMemo(() => {
-    return buildSettingsSkillSections(catalogQuery.data?.skills ?? []);
-  }, [catalogQuery.data?.skills]);
+    return buildSettingsSkillSections(catalogQuery.data?.skills ?? [], t);
+  }, [catalogQuery.data?.skills, t]);
 
   const setSkillEnabled = (skillName: string, enabled: boolean) => {
     // Read through the query cache (not the render closure) so rapid toggles
@@ -190,7 +196,9 @@ export function SkillsSettingsPanel() {
                       onCheckedChange={(checked) =>
                         setSkillEnabled(group.primarySkill.name, Boolean(checked))
                       }
-                      aria-label={`Enable the ${group.displayName} skill`}
+                      aria-label={t("settings.skills.enableSkillAria", {
+                        skillName: group.displayName,
+                      })}
                     />
                   }
                 />

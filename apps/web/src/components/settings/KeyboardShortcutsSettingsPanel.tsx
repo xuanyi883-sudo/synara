@@ -75,7 +75,7 @@ export function KeyboardShortcutsSettingsPanel() {
           nativeInput
           placeholder={t("settings.keyboardShortcuts.searchPlaceholder")}
           value={query}
-          aria-label="Search shortcuts"
+          aria-label={t("settings.keyboardShortcuts.searchPlaceholder")}
           onChange={(event) => setQuery(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Escape" && query.length > 0) {

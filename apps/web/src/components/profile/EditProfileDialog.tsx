@@ -85,7 +85,11 @@ export function EditProfileDialog({
     try {
       setDraftImage(await compressAvatarImage(file));
     } catch (cause) {
-      setError(cause instanceof AvatarImageError ? cause.message : "Could not process that image.");
+      setError(
+        cause instanceof AvatarImageError
+          ? t(cause.i18nKey)
+          : t("profile.edit.couldNotProcessImage"),
+      );
     } finally {
       setProcessing(false);
     }
