@@ -234,15 +234,15 @@ const TIMESTAMP_FORMAT_LABELS = {
   "24-hour": "24-hour",
 } as const;
 
-const SIDEBAR_PROJECT_SORT_ORDER_LABELS = {
-  updated_at: "Recently active",
-  created_at: "Recently added",
-  manual: "Manual order",
+const SIDEBAR_PROJECT_SORT_ORDER_KEYS = {
+  updated_at: "settings.general.projectOrderRecentlyActive",
+  created_at: "settings.general.projectOrderRecentlyAdded",
+  manual: "settings.general.projectOrderManual",
 } as const;
 
-const SIDEBAR_THREAD_SORT_ORDER_LABELS = {
-  updated_at: "Recently active",
-  created_at: "Newest first",
+const SIDEBAR_THREAD_SORT_ORDER_KEYS = {
+  updated_at: "settings.general.threadOrderRecentlyActive",
+  created_at: "settings.general.threadOrderNewestFirst",
 } as const;
 
 type InstallBinarySettingsKey =
@@ -1751,16 +1751,16 @@ function SettingsRouteView() {
                 updateSettings({ sidebarProjectSortOrder: value });
               }}
               ariaLabel={t("settings.general.projectOrder")}
-              valueContent={SIDEBAR_PROJECT_SORT_ORDER_LABELS[settings.sidebarProjectSortOrder]}
+              valueContent={t(SIDEBAR_PROJECT_SORT_ORDER_KEYS[settings.sidebarProjectSortOrder])}
             >
               <SelectItem hideIndicator value="updated_at">
-                {SIDEBAR_PROJECT_SORT_ORDER_LABELS.updated_at}
+                {t(SIDEBAR_PROJECT_SORT_ORDER_KEYS.updated_at)}
               </SelectItem>
               <SelectItem hideIndicator value="created_at">
-                {SIDEBAR_PROJECT_SORT_ORDER_LABELS.created_at}
+                {t(SIDEBAR_PROJECT_SORT_ORDER_KEYS.created_at)}
               </SelectItem>
               <SelectItem hideIndicator value="manual">
-                {SIDEBAR_PROJECT_SORT_ORDER_LABELS.manual}
+                {t(SIDEBAR_PROJECT_SORT_ORDER_KEYS.manual)}
               </SelectItem>
             </SettingsSelectControl>
           }
@@ -1792,13 +1792,13 @@ function SettingsRouteView() {
                 updateSettings({ sidebarThreadSortOrder: value });
               }}
               ariaLabel={t("settings.general.threadOrder")}
-              valueContent={SIDEBAR_THREAD_SORT_ORDER_LABELS[settings.sidebarThreadSortOrder]}
+              valueContent={t(SIDEBAR_THREAD_SORT_ORDER_KEYS[settings.sidebarThreadSortOrder])}
             >
               <SelectItem hideIndicator value="updated_at">
-                {SIDEBAR_THREAD_SORT_ORDER_LABELS.updated_at}
+                {t(SIDEBAR_THREAD_SORT_ORDER_KEYS.updated_at)}
               </SelectItem>
               <SelectItem hideIndicator value="created_at">
-                {SIDEBAR_THREAD_SORT_ORDER_LABELS.created_at}
+                {t(SIDEBAR_THREAD_SORT_ORDER_KEYS.created_at)}
               </SelectItem>
             </SettingsSelectControl>
           }

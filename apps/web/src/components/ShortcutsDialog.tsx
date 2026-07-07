@@ -149,7 +149,9 @@ function ShortcutSection({
             className="group flex items-center justify-between gap-4 rounded-md px-3 py-1.5 hover:bg-muted/60"
           >
             <span className="min-w-0 truncate text-sm text-foreground">
-              {entry.labelKey ? t(entry.labelKey) : entry.label}
+              {entry.labelKey
+                ? t(entry.labelKey, entry.interpolation)
+                : entry.label}
             </span>
             <ShortcutKbd shortcutLabel={entry.shortcutLabel} groupClassName="shrink-0" />
           </li>

@@ -497,13 +497,19 @@
       "ariaLabel": "停止生成",
       "title": "停止当前回复。Mac 上按 Ctrl+C 中断。"
     },
+    "branchToolbar": {
+      "fullAccess": "完全访问",
+      "fullAccessTooltip": "代理可在不询问的情况下运行命令和编辑文件。",
+      "defaultPermissions": "默认权限",
+      "defaultPermissionsTooltip": "代理在运行命令或编辑文件前会询问。"
+    },
     "composer": {
       "sending": "发送中...",
       "refine": "优化",
       "implement": "执行",
-      "implementationActions": "执行操作",
-      "implementNewThread": "在新线程中执行",
-      "connecting": "连接中",
+      "implementationActions": "实现操作",
+      "implementNewThread": "在新会话中执行",
+      "connecting": "正在连接",
       "transcribingVoice": "正在转录语音",
       "preparingWorktree": "正在准备工作树",
       "sendMessage": "发送消息"
@@ -1053,6 +1059,7 @@
       "needsAuth": "未登录",
       "unsupported": "不支持",
       "error": "错误",
+      "unavailable": "用量数据当前不可用。",
       "noUsageData": "暂无可用用量数据。",
       "description": "用量数据从各提供商存储的凭据中只读获取。显示的速率是基于您的套餐和我们观察到的使用情况的最佳估算。"
     },
@@ -1096,8 +1103,13 @@
       "sidebarOrganization": "侧边栏组织",
       "projectOrder": "项目顺序",
       "projectOrderDescription": "项目在侧边栏中的排序方式。",
+      "projectOrderRecentlyActive": "最近活跃",
+      "projectOrderRecentlyAdded": "最近添加",
+      "projectOrderManual": "手动排序",
       "threadOrder": "线程顺序",
       "threadOrderDescription": "每个项目中线程的排序方式。",
+      "threadOrderRecentlyActive": "最近活跃",
+      "threadOrderNewestFirst": "最新优先",
       "sidebarSections": "侧边栏板块",
       "chats": "对话",
       "chatsDescription": "在侧边栏中显示对话线程。",
@@ -1870,7 +1882,7 @@
       "nextVisibleThreadDescription": "循环切换到侧边栏中当前可见的下一个会话。",
       "openInFavoriteEditor": "在偏好编辑器中打开",
       "openInFavoriteEditorDescription": "将当前会话或工作区目标发送到您偏好的编辑器。",
-      "jumpToVisibleThread": "跳转到可见会话 {number}",
+      "jumpToVisibleThread": "跳转到可见会话 {{number}}",
       "jumpToVisibleThreadDescription": "直接从侧边栏数字行聚焦可见会话。",
       "openFullWidthTerminalWorkspace": "打开全宽终端工作区",
       "openFullWidthTerminalWorkspaceDescription": "将活动会话扩展到工作区终端布局。",

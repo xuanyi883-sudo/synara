@@ -498,6 +498,12 @@
       "ariaLabel": "Stop generation",
       "title": "Stop the current response. On Mac, press Ctrl+C to interrupt."
     },
+    "branchToolbar": {
+      "fullAccess": "Full access",
+      "fullAccessTooltip": "The agent can run commands and edit files without asking.",
+      "defaultPermissions": "Default permissions",
+      "defaultPermissionsTooltip": "The agent asks before running commands or editing files."
+    },
     "composer": {
       "sending": "Sending...",
       "refine": "Refine",
@@ -1054,6 +1060,7 @@
       "needsAuth": "Not signed in",
       "unsupported": "Unsupported",
       "error": "Error",
+      "unavailable": "Usage data is currently unavailable.",
       "noUsageData": "No usage data available.",
       "description": "Usage data is fetched read-only from each provider's stored credentials. Rates shown are best-effort estimates based on your plan and any usage we have observed."
     },
@@ -1097,8 +1104,13 @@
       "sidebarOrganization": "Sidebar organization",
       "projectOrder": "Project order",
       "projectOrderDescription": "How projects are sorted in the sidebar.",
+      "projectOrderRecentlyActive": "Recently active",
+      "projectOrderRecentlyAdded": "Recently added",
+      "projectOrderManual": "Manual order",
       "threadOrder": "Thread order",
       "threadOrderDescription": "How threads are sorted within each project.",
+      "threadOrderRecentlyActive": "Recently active",
+      "threadOrderNewestFirst": "Newest first",
       "sidebarSections": "Sidebar sections",
       "chats": "Chats",
       "chatsDescription": "Show chat threads in the sidebar.",
@@ -1871,7 +1883,7 @@
       "nextVisibleThreadDescription": "Cycle to the next thread that is currently visible in the sidebar.",
       "openInFavoriteEditor": "Open in favorite editor",
       "openInFavoriteEditorDescription": "Send the current thread or workspace target to your preferred editor.",
-      "jumpToVisibleThread": "Jump to visible thread {number}",
+      "jumpToVisibleThread": "Jump to visible thread {{number}}",
       "jumpToVisibleThreadDescription": "Focus a visible thread directly from the sidebar number row.",
       "openFullWidthTerminalWorkspace": "Open full-width terminal workspace",
       "openFullWidthTerminalWorkspaceDescription": "Expand the active thread into the workspace terminal layout.",

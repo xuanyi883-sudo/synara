@@ -48,6 +48,7 @@ interface ShortcutDefinition {
   description: string;
   labelKey: string;
   descriptionKey: string;
+  interpolation?: Record<string, string | number>;
 }
 
 const AVAILABLE_NOW_DEFINITIONS: readonly ShortcutDefinition[] = [
@@ -218,9 +219,10 @@ const THREAD_JUMP_DEFINITIONS: readonly ShortcutDefinition[] = Array.from(
   { length: 9 },
   (_, index) => ({
     command: `thread.jump.${index + 1}` as KeybindingCommand,
-    label: `Jump to visible thread ${index + 1}`,
+    label: `Jump to visible thread {{number}}`,
     description: "Focus a visible thread directly from the sidebar number row.",
     labelKey: `shortcuts.sections.jumpToVisibleThread`,
+    interpolation: { number: index + 1 },
     descriptionKey: `shortcuts.sections.jumpToVisibleThreadDescription`,
   }),
 );
@@ -281,6 +283,7 @@ function definitionToEntry(
     description: definition.description,
     labelKey: definition.labelKey,
     descriptionKey: definition.descriptionKey,
+    interpolation: definition.interpolation,
     shortcutLabel,
   };
 }
